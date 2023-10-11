@@ -1,0 +1,4 @@
+# https://github.com/godotengine/godot-demo-projects/blob/master/.gitattributes
+
+* text=auto eol=lf
+*.hdr binary
