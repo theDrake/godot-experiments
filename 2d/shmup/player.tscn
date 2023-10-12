@@ -68,7 +68,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11ea1"]
-size = Vector2(14, 14)
+size = Vector2(12, 12)
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_4pouc")
@@ -84,7 +84,6 @@ position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_p6f8n")
 animation = &"forward"
 autoplay = "forward"
-frame_progress = 0.710315
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_11ea1")

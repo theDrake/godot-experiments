@@ -16,8 +16,8 @@ func _ready():
 	var tween2 = create_tween().set_loops().set_parallel(false).set_trans(Tween.TRANS_BACK)
 	tween2.tween_property($EnemyAnchor, "position:y", $EnemyAnchor.position.y + 3, 1.5).set_ease(Tween.EASE_IN_OUT)
 	tween2.tween_property($EnemyAnchor, "position:y", $EnemyAnchor.position.y - 3, 1.5).set_ease(Tween.EASE_IN_OUT)
-#	spawn_enemies()	
-	
+	spawn_enemies()
+
 func spawn_enemies():
 	for x in range(9):
 		for y in range(3):
@@ -32,11 +32,11 @@ func _on_enemy_died(value):
 	score += value
 	$CanvasLayer/UI.update_score(score)
 	$Camera2D.add_trauma(0.5)
-	
+
 func _process(_delta):
 	if get_tree().get_nodes_in_group("enemies").size() == 0 and playing:
 		spawn_enemies()
-	
+
 func _on_player_died():
 #	print("game over")
 	playing = false
@@ -45,7 +45,7 @@ func _on_player_died():
 	await get_tree().create_timer(2).timeout
 	game_over.hide()
 	start_button.show()
-	
+
 func new_game():
 	score = 0
 	$CanvasLayer/UI.update_score(score)

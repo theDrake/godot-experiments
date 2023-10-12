@@ -9,7 +9,6 @@ signal died
 @export var max_shield = 10
 var shield = max_shield:
 	set = set_shield
-	
 var can_shoot = true
 
 @onready var screensize = get_viewport_rect().size
@@ -22,7 +21,7 @@ func start():
 	position = Vector2(screensize.x / 2, screensize.y - 64)
 	shield = max_shield
 	$GunCooldown.wait_time = cooldown
-	
+
 func _process(delta):
 	var input = Input.get_vector("left", "right", "up", "down")
 	if input.x > 0:
@@ -35,8 +34,7 @@ func _process(delta):
 		$Ship.frame = 1
 		$Ship/Boosters.animation = "forward"
 	position += input * speed * delta
-	position = position.clamp(Vector2(8, 8), screensize-Vector2(8, 8))
-
+	position = position.clamp(Vector2(8, 8), screensize - Vector2(8, 8))
 	if Input.is_action_pressed("shoot"):
 		shoot()
 
@@ -58,10 +56,9 @@ func set_shield(value):
 	if shield <= 0:
 		hide()
 		died.emit()
-		
+
 func _on_gun_cooldown_timeout():
 	can_shoot = true
-
 
 func _on_area_entered(area):
 	if area.is_in_group("enemies"):
