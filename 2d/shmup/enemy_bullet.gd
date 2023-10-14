@@ -1,10 +1,16 @@
 extends Area2D
+## Enemy bullet handler for a 2D shmup.
+##
+## Bullets move down, deplete player's shield, and disappear on exit.
+
 
 @export var speed = 150
 
+
 func start(pos):
 	position = pos
-	
+
+
 func _process(delta):
 	position.y += speed * delta
 

@@ -1,6 +1,10 @@
 extends Area2D
+## Enemy handler for a 2D shmup.
+##
+## Handles movement, shooting, and death.
 
-signal died 
+
+signal died
 
 var start_pos = Vector2.ZERO
 var speed = 0
@@ -25,13 +29,15 @@ func start(pos):
 	$MoveTimer.start()
 	$ShootTimer.wait_time = randf_range(4, 20)
 	$ShootTimer.start()
-	
+
+
 func _process(delta):
 	if follow_anchor:
 		position = start_pos + anchor.position
 	position.y += speed * delta
 	if position.y > screensize.y + 32:
 		start(start_pos)
+
 
 func explode():
 	speed = 0
@@ -41,9 +47,11 @@ func explode():
 	await $AnimationPlayer.animation_finished
 	queue_free()
 
+
 func _on_timer_timeout():
 	speed = randf_range(75, 100)
 	follow_anchor = false
+
 
 func _on_shoot_timer_timeout():
 	var b = bullet_scene.instantiate()

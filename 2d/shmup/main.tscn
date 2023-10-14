@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cr7usmfo6apt8" path="res://Mini Pixel Pack 3/UI objects/GAME_OVER (72 x 8).png" id="3_5ueml"]
 [ext_resource type="Texture2D" uid="uid://o6gwbftsnc8c" path="res://Mini Pixel Pack 3/UI objects/START (48 x 8).png" id="4_37xqa"]
 [ext_resource type="PackedScene" uid="uid://b54c7ad6cogrm" path="res://ui.tscn" id="4_hy8xi"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="7_qw2vk"]
+[ext_resource type="Script" path="res://camera.gd" id="7_bclyl"]
 
 [sub_resource type="Animation" id="Animation_frim2"]
 length = 0.001
@@ -90,7 +90,7 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(120, 160)
-script = ExtResource("7_qw2vk")
+script = ExtResource("7_bclyl")
 noise = SubResource("FastNoiseLite_uf0tv")
 
 [node name="EnemyAnchor" type="Node2D" parent="."]

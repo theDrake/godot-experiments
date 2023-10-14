@@ -1,4 +1,8 @@
 extends Area2D
+## Player input handler for a 2D shmup.
+##
+## Handles movement, shooting, shielding, and death.
+
 
 signal shield_changed
 signal died
@@ -13,14 +17,17 @@ var can_shoot = true
 
 @onready var screensize = get_viewport_rect().size
 
+
 func _ready():
 	start()
+
 
 func start():
 	show()
 	position = Vector2(screensize.x / 2, screensize.y - 64)
 	shield = max_shield
 	$GunCooldown.wait_time = cooldown
+
 
 func _process(delta):
 	var input = Input.get_vector("left", "right", "up", "down")
@@ -38,6 +45,7 @@ func _process(delta):
 	if Input.is_action_pressed("shoot"):
 		shoot()
 
+
 func shoot():
 	if not can_shoot:
 		return
@@ -50,6 +58,7 @@ func shoot():
 	tween.tween_property($Ship, "position:y", 1, 0.1)
 	tween.tween_property($Ship, "position:y", 0, 0.05)
 
+
 func set_shield(value):
 	shield = min(max_shield, value)
 	shield_changed.emit(max_shield, shield)
@@ -57,8 +66,10 @@ func set_shield(value):
 		hide()
 		died.emit()
 
+
 func _on_gun_cooldown_timeout():
 	can_shoot = true
+
 
 func _on_area_entered(area):
 	if area.is_in_group("enemies"):

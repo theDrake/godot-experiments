@@ -1,4 +1,8 @@
 extends HBoxContainer
+## Score display handler for a 2D shmup.
+##
+## Facilitates use of sprites for displaying score digits.
+
 
 var digit_coords = {
 	1: Vector2(0, 0),
@@ -13,8 +17,10 @@ var digit_coords = {
 	0: Vector2(32, 8)
 }
 
+
 func _ready():
 	display_digits(123)
+
 
 func display_digits(n):
 	var s = "%08d" % n
