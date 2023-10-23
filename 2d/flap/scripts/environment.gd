@@ -6,7 +6,7 @@ extends ParallaxBackground
 
 #const SCROLL_SPEED := 80
 
-@onready var Pipes = preload("res://scenes/pipes.tscn")
+@onready var Pipes := preload("res://scenes/pipes.tscn")
 
 
 func _ready() -> void:
