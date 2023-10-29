@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb53pa8k6vb0l"]
+
+[ext_resource type="Texture2D" uid="uid://25aiftc1yc6w" path="res://assets/sprites/frog/jump/frog-jump-2.png" id="1_11tev"]
+[ext_resource type="Script" path="res://scripts/frog.gd" id="1_lf5a4"]
+[ext_resource type="Texture2D" uid="uid://d4belu5hpi6ba" path="res://assets/sprites/frog/idle/frog-idle-1.png" id="2_h2b7k"]
+[ext_resource type="Texture2D" uid="uid://c40e8jq54jm1n" path="res://assets/sprites/frog/idle/frog-idle-2.png" id="3_jq0co"]
+[ext_resource type="Texture2D" uid="uid://bqilh8nefswkq" path="res://assets/sprites/frog/idle/frog-idle-3.png" id="4_owurc"]
+[ext_resource type="Texture2D" uid="uid://pao11kgkht0v" path="res://assets/sprites/frog/idle/frog-idle-4.png" id="5_2mnix"]
+[ext_resource type="Texture2D" uid="uid://bdcyl66nyiabg" path="res://assets/sprites/frog/jump/frog-jump-1.png" id="6_w4kev"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_266t7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_11tev")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h2b7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h2b7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h2b7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h2b7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jq0co")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_owurc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2mnix")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_w4kev")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjxr8"]
+size = Vector2(20, 17)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+script = ExtResource("1_lf5a4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_266t7")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2.5)
+shape = SubResource("RectangleShape2D_wjxr8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.7
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

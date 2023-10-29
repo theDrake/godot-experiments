@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgolj0ipk7p6f"]
+
+[ext_resource type="Texture2D" uid="uid://cyxadu0s077xt" path="res://assets/environment/background/back.png" id="1_5eaj8"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="1_fymww"]
+[ext_resource type="Texture2D" uid="uid://d21i2sfka18m7" path="res://assets/environment/background/middle.png" id="2_ooblj"]
+
+[node name="Background" type="ParallaxBackground"]
+script = ExtResource("1_fymww")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.33, 0.33)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Back" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(576, 360)
+scale = Vector2(3, 3)
+texture = ExtResource("1_5eaj8")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+position = Vector2(0, 168)
+motion_scale = Vector2(0.66, 0.66)
+motion_mirroring = Vector2(1408, 0)
+
+[node name="Middle" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(88, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(264, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle3" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(440, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle4" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(616, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle5" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(792, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle6" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(968, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle7" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(1144, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true
+
+[node name="Middle8" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(1320, 368)
+texture = ExtResource("2_ooblj")
+metadata/_edit_lock_ = true

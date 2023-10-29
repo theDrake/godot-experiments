@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvk31oud2dwcy"]
+
+[ext_resource type="Script" path="res://scripts/eagle.gd" id="1_8tlf1"]
+[ext_resource type="Texture2D" uid="uid://bx5ku4os4wahr" path="res://assets/sprites/eagle/eagle-attack-1.png" id="1_ggmmx"]
+[ext_resource type="Texture2D" uid="uid://xgcbjcyxqoav" path="res://assets/sprites/eagle/eagle-attack-2.png" id="2_e6w65"]
+[ext_resource type="Texture2D" uid="uid://bm6euwd4a2ceb" path="res://assets/sprites/eagle/eagle-attack-3.png" id="3_4vgpt"]
+[ext_resource type="Texture2D" uid="uid://bqmvrkkc2gp3y" path="res://assets/sprites/eagle/eagle-attack-4.png" id="4_uasxi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_je55d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ggmmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e6w65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4vgpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uasxi")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okba3"]
+height = 24.0
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+script = ExtResource("1_8tlf1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_je55d")
+animation = &"fly"
+autoplay = "fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_okba3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

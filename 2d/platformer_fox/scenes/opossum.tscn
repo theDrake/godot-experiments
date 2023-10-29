@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://cu0k7pl7wxit6"]
+
+[ext_resource type="Texture2D" uid="uid://uo1av76r3ug5" path="res://assets/sprites/opossum/opossum-1.png" id="1_faley"]
+[ext_resource type="Script" path="res://scripts/opossum.gd" id="1_wl04h"]
+[ext_resource type="Texture2D" uid="uid://cqy4tv3lhg53j" path="res://assets/sprites/opossum/opossum-2.png" id="2_wxmi4"]
+[ext_resource type="Texture2D" uid="uid://cy71mjpfeywyr" path="res://assets/sprites/opossum/opossum-3.png" id="3_nwi30"]
+[ext_resource type="Texture2D" uid="uid://ba75o3rwcgu2h" path="res://assets/sprites/opossum/opossum-4.png" id="4_mqkr4"]
+[ext_resource type="Texture2D" uid="uid://bm6xt3waep7dr" path="res://assets/sprites/opossum/opossum-5.png" id="5_0clbm"]
+[ext_resource type="Texture2D" uid="uid://dup8o3yhuw5go" path="res://assets/sprites/opossum/opossum-6.png" id="6_lc5wc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dvhv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_faley")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wxmi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nwi30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mqkr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0clbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lc5wc")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqdju"]
+size = Vector2(22, 16)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+script = ExtResource("1_wl04h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3dvhv")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 5)
+shape = SubResource("RectangleShape2D_bqdju")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-13, 0)
+target_position = Vector2(0, 15)
