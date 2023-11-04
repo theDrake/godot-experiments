@@ -1,4 +1,8 @@
 extends AnimatableBody2D
+## Frog handler for the 'Fox' platformer game.
+##
+## Frogs stay in one spot, occasionally jump, and are harmless to the player.
+## They can serve as a launch pad to get to higher areas.
 
 
 const JUMP_SPEED := 300.0
@@ -7,8 +11,8 @@ const JUMP_HEIGHT := 100.0
 var _jumping := false
 var _falling := false
 
-@onready var _anim := get_node("AnimatedSprite2D") as AnimatedSprite2D
-@onready var _jump_timer := get_node("Timer") as Timer
+@onready var _anim := $AnimatedSprite2D as AnimatedSprite2D
+@onready var _jump_timer := $Timer as Timer
 @onready var _spawn_y := position.y
 
 

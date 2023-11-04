@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://ljhxtsgoflof"]
+
+[ext_resource type="Script" path="res://scripts/gem.gd" id="1_bttcx"]
+[ext_resource type="Texture2D" uid="uid://ddsia1kuj6th5" path="res://assets/sprites/item-feedback/item-feedback-1.png" id="1_omxab"]
+[ext_resource type="Texture2D" uid="uid://5kckm7mck4ku" path="res://assets/sprites/item-feedback/item-feedback-2.png" id="2_6pjo3"]
+[ext_resource type="Texture2D" uid="uid://c64lpdaah0d4u" path="res://assets/sprites/item-feedback/item-feedback-3.png" id="3_ykajb"]
+[ext_resource type="Texture2D" uid="uid://da0uvw0p7v763" path="res://assets/sprites/item-feedback/item-feedback-4.png" id="4_bmkhk"]
+[ext_resource type="Texture2D" uid="uid://bu2rj8prgug2c" path="res://assets/sprites/gem/gem-1.png" id="5_8t4dt"]
+[ext_resource type="Texture2D" uid="uid://cjnag8tgw7md4" path="res://assets/sprites/gem/gem-2.png" id="6_ebnis"]
+[ext_resource type="Texture2D" uid="uid://csxw01ib3sdum" path="res://assets/sprites/gem/gem-3.png" id="7_w11rf"]
+[ext_resource type="Texture2D" uid="uid://bukdw3pxkwu0n" path="res://assets/sprites/gem/gem-4.png" id="8_egyxp"]
+[ext_resource type="Texture2D" uid="uid://bcnxwjut0sfun" path="res://assets/sprites/gem/gem-5.png" id="9_v2r8p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggvtc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_omxab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6pjo3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ykajb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bmkhk")
+}],
+"loop": false,
+"name": &"collected",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8t4dt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ebnis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w11rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_egyxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v2r8p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oykda"]
+radius = 5.0
+
+[node name="Gem" type="Area2D"]
+script = ExtResource("1_bttcx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ggvtc")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_oykda")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

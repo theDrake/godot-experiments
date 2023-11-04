@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvk31oud2dwcy"]
+[gd_scene load_steps=9 format=3 uid="uid://dvk31oud2dwcy"]
 
 [ext_resource type="Script" path="res://scripts/eagle.gd" id="1_8tlf1"]
 [ext_resource type="Texture2D" uid="uid://bx5ku4os4wahr" path="res://assets/sprites/eagle/eagle-attack-1.png" id="1_ggmmx"]
@@ -26,8 +26,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okba3"]
-height = 24.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1j6n4"]
+size = Vector2(24, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjxto"]
+size = Vector2(24, 10)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D"]
 script = ExtResource("1_8tlf1")
@@ -38,12 +41,19 @@ animation = &"fly"
 autoplay = "fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 7)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_okba3")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_1j6n4")
+one_way_collision = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_sjxto")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

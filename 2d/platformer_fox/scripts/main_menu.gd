@@ -1,4 +1,7 @@
 extends Node2D
+## Main menu for the 'Fox' platformer game.
+##
+## Provides buttons to 'Play' or 'Quit'.
 
 
 func _on_play_button_pressed() -> void:

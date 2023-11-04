@@ -1,15 +1,73 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu0k7pl7wxit6"]
+[gd_scene load_steps=19 format=3 uid="uid://cu0k7pl7wxit6"]
 
 [ext_resource type="Texture2D" uid="uid://uo1av76r3ug5" path="res://assets/sprites/opossum/opossum-1.png" id="1_faley"]
 [ext_resource type="Script" path="res://scripts/opossum.gd" id="1_wl04h"]
+[ext_resource type="Texture2D" uid="uid://d2rl2ah0awdy" path="res://assets/sprites/enemy-death/enemy-death-1.png" id="2_aqpiq"]
 [ext_resource type="Texture2D" uid="uid://cqy4tv3lhg53j" path="res://assets/sprites/opossum/opossum-2.png" id="2_wxmi4"]
+[ext_resource type="Texture2D" uid="uid://bekbnnu80ejnt" path="res://assets/sprites/enemy-death/enemy-death-2.png" id="3_h2no4"]
 [ext_resource type="Texture2D" uid="uid://cy71mjpfeywyr" path="res://assets/sprites/opossum/opossum-3.png" id="3_nwi30"]
 [ext_resource type="Texture2D" uid="uid://ba75o3rwcgu2h" path="res://assets/sprites/opossum/opossum-4.png" id="4_mqkr4"]
+[ext_resource type="Texture2D" uid="uid://bd813vja6h1hi" path="res://assets/sprites/enemy-death/enemy-death-3.png" id="4_nrygr"]
 [ext_resource type="Texture2D" uid="uid://bm6xt3waep7dr" path="res://assets/sprites/opossum/opossum-5.png" id="5_0clbm"]
+[ext_resource type="Texture2D" uid="uid://b1x7h3kirx32v" path="res://assets/sprites/enemy-death/enemy-death-4.png" id="5_lteqp"]
 [ext_resource type="Texture2D" uid="uid://dup8o3yhuw5go" path="res://assets/sprites/opossum/opossum-6.png" id="6_lc5wc"]
+[ext_resource type="Texture2D" uid="uid://b44qyxbsxwbbt" path="res://assets/sprites/enemy-death/enemy-death-5.png" id="6_vgdrn"]
+[ext_resource type="Texture2D" uid="uid://clvvj0280c6eu" path="res://assets/sprites/enemy-death/enemy-death-6.png" id="7_sngt4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2twbt"]
+size = Vector2(28, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7d7tk"]
+radius = 100.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3dvhv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aqpiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h2no4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nrygr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lteqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vgdrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_sngt4")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_faley")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wxmi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nwi30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mqkr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0clbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lc5wc")
+}],
+"loop": true,
+"name": &"run",
+"speed": 15.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_faley")
@@ -34,21 +92,46 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqdju"]
-size = Vector2(22, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fsa5"]
+size = Vector2(20, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jlmi"]
+size = Vector2(30, 3)
 
 [node name="AnimatableBody2D" type="AnimatableBody2D"]
 script = ExtResource("1_wl04h")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_2twbt")
+
+[node name="SensorArea" type="Area2D" parent="."]
+
+[node name="CollisionSensor" type="CollisionShape2D" parent="SensorArea"]
+shape = SubResource("CircleShape2D_7d7tk")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3dvhv")
-animation = &"walk"
+animation = &"run"
 autoplay = "walk"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, 5)
-shape = SubResource("RectangleShape2D_bqdju")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-13, 0)
 target_position = Vector2(0, 15)
+
+[node name="TopArea" type="Area2D" parent="."]
+
+[node name="CollisionTop" type="CollisionShape2D" parent="TopArea"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2fsa5")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionAttack" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_3jlmi")
+
+[connection signal="body_entered" from="SensorArea" to="." method="_on_sensor_area_body_entered"]
+[connection signal="body_exited" from="SensorArea" to="." method="_on_sensor_area_body_exited"]
+[connection signal="body_entered" from="TopArea" to="." method="_on_top_area_body_entered"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

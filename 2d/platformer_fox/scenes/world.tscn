@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://h068fby03ryt"]
+[gd_scene load_steps=22 format=3 uid="uid://h068fby03ryt"]
 
 [ext_resource type="PackedScene" uid="uid://oq052r4e2gk" path="res://scenes/player.tscn" id="1_bn4yl"]
 [ext_resource type="Texture2D" uid="uid://cypxg5cuqadlk" path="res://assets/environment/main-tileset.png" id="2_2w1so"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://bb53pa8k6vb0l" path="res://scenes/frog.tscn" id="12_1rwf2"]
 [ext_resource type="PackedScene" uid="uid://dvk31oud2dwcy" path="res://scenes/eagle.tscn" id="13_hac0q"]
 [ext_resource type="PackedScene" uid="uid://cu0k7pl7wxit6" path="res://scenes/opossum.tscn" id="14_brrma"]
+[ext_resource type="PackedScene" uid="uid://r380ugxpu3u7" path="res://scenes/cherry.tscn" id="15_lojs4"]
+[ext_resource type="PackedScene" uid="uid://ljhxtsgoflof" path="res://scenes/gem.tscn" id="16_3uqa3"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_flfxe"]
 tile_data = PackedInt32Array(0, 196608, 1, 65536, 65536, 10, 1, 65536, 1, 65537, 131072, 10, 131073, 131072, 11, 2, 196608, 1, 65538, 196608, 3, 131074, 65536, 5, 3, 327680, 1, 65539, 196608, 3, 131075, 196608, 5, 4, 196608, 1, 65540, 196608, 3, 131076, 327680, 5, 5, 327680, 1, 65541, 262144, 10, 131077, 262144, 11, 6, 65536, 1, 65542, 327680, 10)
@@ -424,7 +426,7 @@ pattern_2 = SubResource("TileMapPattern_86nc6")
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_bn4yl")]
-position = Vector2(100, 136)
+position = Vector2(106, 330)
 
 [node name="Background" parent="." instance=ExtResource("2_u0jai")]
 
@@ -514,19 +516,51 @@ position = Vector2(869, 597)
 position = Vector2(539, 368)
 
 [node name="Eagle2" parent="Creatures" instance=ExtResource("13_hac0q")]
-position = Vector2(965, 474)
-
-[node name="Eagle3" parent="Creatures" instance=ExtResource("13_hac0q")]
-position = Vector2(357, 261)
+position = Vector2(985, 507)
 
 [node name="Opossum" parent="Creatures" instance=ExtResource("14_brrma")]
-position = Vector2(830, 595)
-
-[node name="Opossum2" parent="Creatures" instance=ExtResource("14_brrma")]
-position = Vector2(123, 419)
+position = Vector2(830, 594)
 
 [node name="Opossum3" parent="Creatures" instance=ExtResource("14_brrma")]
-position = Vector2(185, 483)
+position = Vector2(185, 482)
 
 [node name="Opossum4" parent="Creatures" instance=ExtResource("14_brrma")]
-position = Vector2(341, 451)
+position = Vector2(341, 450)
+
+[node name="Items" type="Node" parent="."]
+
+[node name="Cherry" parent="Items" instance=ExtResource("15_lojs4")]
+position = Vector2(526, 560)
+
+[node name="Cherry2" parent="Items" instance=ExtResource("15_lojs4")]
+position = Vector2(769, 554)
+
+[node name="Cherry3" parent="Items" instance=ExtResource("15_lojs4")]
+position = Vector2(946, 562)
+
+[node name="Gem" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(212, 300)
+
+[node name="Gem2" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(212, 320)
+
+[node name="Gem3" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(212, 340)
+
+[node name="Gem4" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(864, 410)
+
+[node name="Gem5" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(864, 430)
+
+[node name="Gem6" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(864, 450)
+
+[node name="Gem7" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(352, 229)
+
+[node name="Gem8" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(352, 249)
+
+[node name="Gem9" parent="Items" instance=ExtResource("16_3uqa3")]
+position = Vector2(352, 269)
