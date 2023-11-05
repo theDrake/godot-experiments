@@ -17,8 +17,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2twbt"]
 size = Vector2(28, 14)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7d7tk"]
-radius = 100.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n2a3y"]
+radius = 16.0
+height = 200.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3dvhv"]
 animations = [{
@@ -98,7 +99,7 @@ size = Vector2(20, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3jlmi"]
 size = Vector2(30, 3)
 
-[node name="AnimatableBody2D" type="AnimatableBody2D"]
+[node name="Opossum" type="AnimatableBody2D"]
 script = ExtResource("1_wl04h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -107,8 +108,9 @@ shape = SubResource("RectangleShape2D_2twbt")
 
 [node name="SensorArea" type="Area2D" parent="."]
 
-[node name="CollisionSensor" type="CollisionShape2D" parent="SensorArea"]
-shape = SubResource("CircleShape2D_7d7tk")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SensorArea"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_n2a3y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3dvhv")
@@ -121,13 +123,13 @@ target_position = Vector2(0, 15)
 
 [node name="TopArea" type="Area2D" parent="."]
 
-[node name="CollisionTop" type="CollisionShape2D" parent="TopArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopArea"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_2fsa5")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
-[node name="CollisionAttack" type="CollisionShape2D" parent="AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_3jlmi")
 

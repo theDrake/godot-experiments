@@ -119,7 +119,7 @@ func _die() -> void:
 		await _anim.animation_finished
 		_anim.visible = false
 		if _lives > 0:
-			await get_tree().create_timer(1.0).timeout
+			await get_tree().create_timer(0.5).timeout
 			_anim.play("idle")
 			position = _spawn_point
 			_anim.visible = true
@@ -127,5 +127,5 @@ func _die() -> void:
 			_dead = false
 			_set_health(STARTING_HEALTH)
 		else:
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(1.0).timeout
 			get_tree().reload_current_scene()
