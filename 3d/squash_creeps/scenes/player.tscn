@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://0882ghje72wb"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_j31f4"]
+[ext_resource type="PackedScene" uid="uid://g8fbx8xlkofq" path="res://art/player.glb" id="1_vxeht"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vpdlx"]
+radius = 0.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x8pa1"]
+height = 0.25
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_hqa1h"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7),
+"transitions": PackedFloat32Array(0.420449, 2.07053),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.65, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Model:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(0.420449, 0.450625),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kk5uf"]
+_data = {
+"float": SubResource("Animation_hqa1h")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 6
+script = ExtResource("1_j31f4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_vpdlx")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Model" parent="Pivot" instance=ExtResource("1_vxeht")]
+transform = Transform3D(1, 0, 0, 0, 0.999999, -0.00138318, 0, 0.00138318, 0.999999, 0, 0.404373, 0)
+
+[node name="EnemySensor" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemySensor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_x8pa1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "float"
+libraries = {
+"": SubResource("AnimationLibrary_kk5uf")
+}
+
+[connection signal="body_entered" from="EnemySensor" to="." method="_on_enemy_sensor_body_entered"]
