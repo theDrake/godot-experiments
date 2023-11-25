@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://wd7w80ankdh"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_aob47"]
+[ext_resource type="FontFile" uid="uid://cit6gwe5px1q8" path="res://fonts/Xolonium-Regular.ttf" id="1_lney7"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_63yy0"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_i00us"]
+events = [SubResource("InputEventAction_63yy0")]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_aob47")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_right = 140.0
+offset_bottom = 81.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_lney7")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -121.5
+offset_right = 225.0
+offset_bottom = 121.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_lney7")
+theme_override_font_sizes/font_size = 64
+text = "Dodge the Creeps!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -200.0
+offset_right = 125.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_lney7")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_i00us")
+text = "Start"
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
