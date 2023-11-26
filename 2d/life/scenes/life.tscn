@@ -5,6 +5,10 @@
 [node name="Life" type="Node2D"]
 script = ExtResource("1_fh0n1")
 
+[node name="MouseIndicator" type="ReferenceRect" parent="."]
+z_index = 1
+editor_only = false
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
