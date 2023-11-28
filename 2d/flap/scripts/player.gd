@@ -5,6 +5,8 @@ extends RigidBody2D
 ## disappear upon impact with a pipe or the ground.
 
 
+signal died
+
 const UPWARD_SPEED := 250
 const ROTATION_SPEED := 5
 
@@ -17,5 +19,6 @@ func _input(event):
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name != "Player":
+	if not body.name.begins_with("Play"):
+		died.emit()
 		queue_free()
