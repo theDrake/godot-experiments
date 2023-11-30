@@ -1,6 +1,9 @@
-# Godot 101: Classic Shmup
+# Shmup
 
-![alt](http://kidscancode.org/godot_recipes/4.x/img/2d_101_screenshot.png)
+A simple 2D [shoot 'em up](https://en.wikipedia.org/wiki/Shoot_%27em_up) based on a [tutorial](http://kidscancode.org/godot_recipes/4.x/games/first_2d/). Art assets courtesy of [GrafxKid](https://grafxkid.itch.io/mini-pixel-pack-3) ([CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)).
 
-Tutorial:
-http://kidscancode.org/godot_recipes/4.x/games/first_2d/
+![Spaceship confronting aliens](http://kidscancode.org/godot_recipes/4.x/img/2d_101_screenshot.png)
+
+## Controls
+
+Move via <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> and shoot via <kbd>Ctrl</kbd> or <kbd>Space</kbd>.
