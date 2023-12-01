@@ -77,6 +77,7 @@ func _set_shield(value: float) -> void:
 	shield_changed.emit(_shield)
 	if _shield <= 0:
 		hide()
+		position.x = -100
 		set_process(false)
 		died.emit()
 

@@ -9,20 +9,15 @@ extends Camera2D
 @export var max_roll := 0.2
 @export var shake_decay := 0.85
 
-var _shake := 0.0:
+var _shake: float:
 	set(n):
-		if n < 0:
-			_shake = 0.0
-		elif n > max_shake:
-			_shake = max_shake
-		else:
-			_shake = n
+		_shake = clamp(n, 0, max_shake)
 var _shake_power := 2.5
 
 
 func _process(delta: float) -> void:
 	if _shake:
-		_shake = max(_shake - shake_decay * delta, 0)
+		_shake -= shake_decay * delta
 		_shake_camera()
 
 

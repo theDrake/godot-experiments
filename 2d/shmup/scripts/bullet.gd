@@ -1,4 +1,3 @@
-class_name PlayerBullet
 extends Area2D
 ## Player bullet handler for a 2D shmup.
 ##
