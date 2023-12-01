@@ -1,6 +1,6 @@
 # Dodge the Creeps
 
-A simple 2D game of avoiding enemies. Based on a [Godot  tutorial](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/).
+A simple 2D game of avoiding enemies. Based on an [official tutorial](https://docs.godotengine.org/en/latest/getting_started/first_2d_game/) and modified using [Godot 4.1](https://godotengine.org/download/).
 
 ![GIF from tutorial](https://docs.godotengine.org/en/latest/_images/dodge_preview.gif)
 

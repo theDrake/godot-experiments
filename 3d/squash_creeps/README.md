@@ -1,6 +1,6 @@
 # Squash the Creeps
 
-A simple 3D game of squashing enemies. Based on a [Godot  tutorial](https://docs.godotengine.org/en/latest/getting_started/first_3d_game/).
+A simple 3D game of squashing enemies. Based on an [official tutorial](https://docs.godotengine.org/en/latest/getting_started/first_3d_game/) and modified using [Godot 4.1](https://godotengine.org/download/).
 
 ![GIF from tutorial](https://docs.godotengine.org/en/latest/_images/squash-the-creeps-final.gif)
 
