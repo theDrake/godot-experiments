@@ -14,8 +14,9 @@ config/name="Pong"
 config/description="A simple Pong game."
 config/tags=PackedStringArray("2d")
 run/main_scene="pong.tscn"
-config/features=PackedStringArray("4.1")
-config/icon="res://icon.webp"
+config/features=PackedStringArray("4.2")
+config/icon="res://pong.png"
+config/windows_native_icon="res://pong.ico"
 
 [display]
 

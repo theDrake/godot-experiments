@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brwp8bimc75uu"
-path="res://.godot/imported/icon.webp-e94f9a68b0f625a567a797079e4d325f.ctex"
+uid="uid://7g5cds3srx6t"
+path="res://.godot/imported/pong.png-c769c13a5fd54d114201264649699a28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.webp"
-dest_files=["res://.godot/imported/icon.webp-e94f9a68b0f625a567a797079e4d325f.ctex"]
+source_file="res://pong.png"
+dest_files=["res://.godot/imported/pong.png-c769c13a5fd54d114201264649699a28.ctex"]
 
 [params]
 

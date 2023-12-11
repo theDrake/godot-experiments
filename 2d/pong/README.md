@@ -1,6 +1,6 @@
 # Pong
 
-A simple two-player [Pong](https://en.wikipedia.org/wiki/Pong) game. Based on an [official demo](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong) and modified using [Godot 4.1](https://godotengine.org/download/).
+A simple two-player [_Pong_](https://en.wikipedia.org/wiki/Pong) game. Based on an [official demo](https://github.com/godotengine/godot-demo-projects/tree/master/2d/pong) and slightly modified using [Godot 4.2](https://godotengine.org/download/).
 
 ![Screenshot](https://github.com/godotengine/godot-demo-projects/blob/master/2d/pong/screenshots/pong.png?raw=true)
 
