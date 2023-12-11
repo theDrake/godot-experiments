@@ -1,8 +1,8 @@
 # 3D FPS
 
-A simple [first-person shooter (FPS)](https://en.wikipedia.org/wiki/First-person_shooter) game. Based on a [starter kit](https://github.com/KenneyNL/Starter-Kit-FPS) created by [Kenney](https://kenney.nl) and modified using [Godot 4.1](https://godotengine.org/download/).
+A simple [first-person shooter (FPS)](https://en.wikipedia.org/wiki/First-person_shooter) game. Based on a [starter kit](https://github.com/KenneyNL/Starter-Kit-FPS) created by [Kenney](https://kenney.nl) and slightly modified using [Godot 4.2](https://godotengine.org/download/).
 
-<p align="center"><img src="screenshots/screenshot.png"/></p>
+![Screenshot](screenshots/screenshot.png)
 
 ### Controls
 

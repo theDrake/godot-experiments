@@ -13,9 +13,10 @@ config_version=5
 config/name="3D FPS"
 config/tags=PackedStringArray("3d", "shooter")
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/show_image=false
-config/icon="res://icon.png"
+config/icon="res://fps.png"
+config/windows_native_icon="res://fps.ico"
 
 [autoload]
 

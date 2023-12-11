@@ -1,8 +1,8 @@
 # 3D Platformer
 
-A simple 3D [platformer](https://en.wikipedia.org/wiki/Platformer) game. Based on a [starter kit](https://github.com/KenneyNL/Starter-Kit-3D-Platformer) created by [Kenney](https://kenney.nl) and modified using [Godot 4.1](https://godotengine.org/download/).
+A simple 3D [platformer](https://en.wikipedia.org/wiki/Platformer) game. Based on a [starter kit](https://github.com/KenneyNL/Starter-Kit-3D-Platformer) created by [Kenney](https://kenney.nl) and slightly modified using [Godot 4.2](https://godotengine.org/download/).
 
-<p align="center"><img src="screenshots/screenshot.png"/></p>
+![Screenshot](screenshots/screenshot.png)
 
 ### Controls
 
