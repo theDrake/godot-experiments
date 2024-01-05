@@ -4,7 +4,11 @@ extends Node2D
 ## Handles the setup, starting, and ending of game sessions.
 
 
-var _enemy := preload("res://scenes/enemy.tscn")
+var _enemies := [
+	preload("res://scenes/enemy_01.tscn"),
+	preload("res://scenes/enemy_02.tscn"),
+	preload("res://scenes/enemy_03.tscn"),
+]
 var _score := 0
 var _playing := false
 
@@ -46,9 +50,10 @@ func new_game() -> void:
 
 
 func spawn_enemies() -> void:
+	var i := randi() % _enemies.size()
 	for x in range(9):
 		for y in range(3):
-			var e := _enemy.instantiate()
+			var e := _enemies[i].instantiate() as Enemy
 			var pos := Vector2(x * (16 + 8) + 24, 16 * 4 + y * 16)
 			add_child(e)
 			e.start(pos)

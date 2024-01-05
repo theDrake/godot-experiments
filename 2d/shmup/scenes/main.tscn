@@ -81,10 +81,10 @@ region_rect = Rect2(2.08165e-12, 2.08165e-12, 240, 320)
 position = Vector2(120, 240)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "new_animation"
 libraries = {
 "": SubResource("AnimationLibrary_d33qh")
 }
+autoplay = "new_animation"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(120, 160)
