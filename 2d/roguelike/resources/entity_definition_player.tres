@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=4 format=3 uid="uid://hy64cr2ynvgx"]
+
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_e1lav"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_805io"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hciw2"]
+atlas = ExtResource("2_805io")
+region = Rect2(448, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_e1lav")
+texture = SubResource("AtlasTexture_hciw2")
+color = Color(1, 1, 1, 1)
