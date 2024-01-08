@@ -20,7 +20,6 @@ func _init(map_width: int, map_height: int) -> void:
 
 func _setup_tiles() -> void:
 	tiles = []
-
 	for y in height:
 		for x in width:
 			var tile_position := Vector2i(x, y)

@@ -13,7 +13,7 @@ func perform(game: Game, entity: Entity) -> void:
 	var destination_tile: Tile = game.get_map_data().get_tile(
 			entity.grid_position + offset)
 
-	if not destination_tile or not destination_tile.is_walkable():
+	if not destination_tile or destination_tile.blocks_movement():
 		return
 
 	entity.move(offset)

@@ -20,18 +20,13 @@ func _ready() -> void:
 
 func generate_dungeon(player: Entity) -> MapData:
 	var dungeon := MapData.new(map_width, map_height)
-
 	var rooms: Array[Rect2i] = []
-
 	for _try_room in max_rooms:
 		var room_width: int = _rng.randi_range(room_min_size, room_max_size)
 		var room_height: int = _rng.randi_range(room_min_size, room_max_size)
-
 		var x: int = _rng.randi_range(0, dungeon.width - room_width - 1)
 		var y: int = _rng.randi_range(0, dungeon.height - room_height - 1)
-
 		var new_room := Rect2i(x, y, room_width, room_height)
-
 		var has_intersections := false
 		for room in rooms:
 			if room.intersects(new_room.grow(-1)):
@@ -39,15 +34,12 @@ func generate_dungeon(player: Entity) -> MapData:
 				break
 		if has_intersections:
 			continue
-
 		_carve_room(dungeon, new_room)
-
 		if rooms.is_empty():
 			player.grid_position = new_room.get_center()
 		else:
 			_tunnel_between(dungeon, rooms.back().get_center(),
 					new_room.get_center())
-
 		rooms.append(new_room)
 
 	return dungeon
