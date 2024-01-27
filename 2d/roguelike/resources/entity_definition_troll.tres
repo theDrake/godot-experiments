@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=7 format=3 uid="uid://dhxssl3mye035"]
+
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_i60mm"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_fighter_definition.gd" id="1_p18ll"]
+[ext_resource type="Texture2D" uid="uid://dr7f3knnabl5l" path="res://resources/default_death_texture.tres" id="1_uujld"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_ktm8b"]
+
+[sub_resource type="Resource" id="Resource_c47ef"]
+script = ExtResource("1_p18ll")
+max_hp = 16
+power = 5
+defense = 2
+death_texture = ExtResource("1_uujld")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6noa"]
+atlas = ExtResource("2_ktm8b")
+region = Rect2(400, 144, 16, 16)
+
+[resource]
+script = ExtResource("1_i60mm")
+name = "Troll"
+texture = SubResource("AtlasTexture_p6noa")
+color = Color(1, 1, 1, 1)
+blocks_movement = true
+type = 2
+fighter_def = SubResource("Resource_c47ef")
+personality = 2

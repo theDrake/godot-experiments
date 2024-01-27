@@ -1,16 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://46anou4qqat5"]
+[gd_scene load_steps=8 format=3 uid="uid://46anou4qqat5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4v3re"]
+[ext_resource type="Script" path="res://scripts/input/input_handler.gd" id="2_f4cem"]
 [ext_resource type="Script" path="res://scripts/map/dungeon_generator.gd" id="2_g3luc"]
+[ext_resource type="Script" path="res://scripts/input/input_game_over.gd" id="3_dowce"]
 [ext_resource type="Script" path="res://scripts/map/map.gd" id="3_poe1w"]
-[ext_resource type="Script" path="res://scripts/event_handler.gd" id="3_xbf76"]
+[ext_resource type="Script" path="res://scripts/input/input_main.gd" id="3_xbf76"]
 [ext_resource type="Script" path="res://scripts/map/field_of_view.gd" id="5_04jm3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_4v3re")
 
-[node name="EventHandler" type="Node" parent="."]
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("2_f4cem")
+
+[node name="Main" type="Node" parent="InputHandler"]
 script = ExtResource("3_xbf76")
+
+[node name="GameOver" type="Node" parent="InputHandler"]
+script = ExtResource("3_dowce")
 
 [node name="Map" type="Node2D" parent="."]
 script = ExtResource("3_poe1w")
@@ -21,7 +29,9 @@ script = ExtResource("2_g3luc")
 [node name="FieldOfView" type="Node" parent="Map"]
 script = ExtResource("5_04jm3")
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Tiles" type="Node2D" parent="Map"]
+
+[node name="Entities" type="Node2D" parent="Map"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)

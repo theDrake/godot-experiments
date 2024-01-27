@@ -1,7 +1,16 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=4 format=3 uid="uid://hy64cr2ynvgx"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=7 format=3 uid="uid://hy64cr2ynvgx"]
 
 [ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_e1lav"]
+[ext_resource type="Texture2D" uid="uid://dr7f3knnabl5l" path="res://resources/default_death_texture.tres" id="1_n7isg"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_fighter_definition.gd" id="1_rt25s"]
 [ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_805io"]
+
+[sub_resource type="Resource" id="Resource_obms5"]
+script = ExtResource("1_rt25s")
+max_hp = 30
+power = 6
+defense = 2
+death_texture = ExtResource("1_n7isg")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hciw2"]
 atlas = ExtResource("2_805io")
@@ -9,5 +18,10 @@ region = Rect2(448, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_e1lav")
+name = "Player"
 texture = SubResource("AtlasTexture_hciw2")
 color = Color(1, 1, 1, 1)
+blocks_movement = true
+type = 2
+fighter_def = SubResource("Resource_obms5")
+personality = 2

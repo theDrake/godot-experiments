@@ -12,5 +12,5 @@ script = ExtResource("1_8eu38")
 texture = SubResource("AtlasTexture_08y2m")
 color_lit = Color(1, 1, 1, 1)
 color_dark = Color(0.411765, 0.411765, 0.411765, 1)
-is_walkable = true
-is_transparent = true
+blocks_movement = false
+blocks_sight = false
