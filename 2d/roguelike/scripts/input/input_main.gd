@@ -14,11 +14,13 @@ const DIRECTIONS = {
 }
 
 
-static func get_action(player: Entity) -> Action:
+func get_action(player: Entity) -> Action:
 	if Input.is_action_just_pressed("quit"):
 		return ActionQuit.new(player)
 	elif Input.is_action_just_pressed("wait"):
 		return ActionWait.new(player)
+	elif Input.is_action_just_pressed("view_history"):
+		SignalBus.toggle_view_history.emit()
 	for direction in DIRECTIONS:
 		if Input.is_action_just_pressed(direction):
 			var offset: Vector2i = DIRECTIONS[direction]

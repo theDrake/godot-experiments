@@ -2,10 +2,13 @@ class_name ComponentFighter
 extends Component
 
 
+signal hp_changed(hp, max_hp)
+
 var max_hp: int
 var hp: int:
 	set(value):
 		hp = clampi(value, 0, max_hp)
+		hp_changed.emit(hp, max_hp)
 		if hp <= 0:
 			die()
 var defense: int
@@ -26,12 +29,16 @@ func _init(definition: ComponentFighterDefinition) -> void:
 
 func die() -> void:
 	var death_message: String
+	var death_message_color: Color
 	if entity == get_map_data().get_player():
 		death_message = "Alas, thou hast perished!"
+		death_message_color = GameColors.PLAYER_DEATH
 		SignalBus.player_died.emit()
 	else:
 		death_message = "%s is dead!" % entity.entity_name
-	print(death_message)
+		death_message_color = GameColors.ENEMY_DEATH
+	MessageLog.send_message(death_message, death_message_color)
+
 	entity.texture = death_texture
 	#entity.modulate = death_color
 	entity.mover_type.queue_free()
