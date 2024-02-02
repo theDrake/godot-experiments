@@ -2,9 +2,11 @@ class_name MapData
 extends RefCounted
 
 
+signal entity_placed(entity)
+
 const TILE_TYPES = {
-	"floor": preload("res://resources/tile_definition_floor.tres"),
-	"wall": preload("res://resources/tile_definition_wall.tres"),
+	"floor": preload("res://resources/tile_floor.tres"),
+	"wall": preload("res://resources/tile_wall.tres"),
 }
 const BLOCKER_PATHFINDING_WEIGHT: float = 10.0
 
@@ -64,6 +66,15 @@ func get_actors() -> Array[Entity]:
 			actors.append(entity)
 
 	return actors
+
+
+func get_items() -> Array[Entity]:
+	var items: Array[Entity] = []
+	for entity in entities:
+		if entity.usable:
+			items.append(entity)
+
+	return items
 
 
 func get_actor_at(location: Vector2i) -> Entity:

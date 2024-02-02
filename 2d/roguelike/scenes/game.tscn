@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://46anou4qqat5"]
+[gd_scene load_steps=21 format=3 uid="uid://46anou4qqat5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4v3re"]
 [ext_resource type="Script" path="res://scripts/input/input_handler.gd" id="2_f4cem"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/input/input_main.gd" id="3_xbf76"]
 [ext_resource type="Script" path="res://scripts/map/field_of_view.gd" id="5_04jm3"]
 [ext_resource type="Script" path="res://scripts/input/input_history_viewer.gd" id="5_majhn"]
+[ext_resource type="Script" path="res://scripts/input/input_base.gd" id="5_mvpn3"]
 [ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="8_d1sjd"]
 [ext_resource type="FontFile" uid="uid://echw0a2twfcv" path="res://fonts/Kenney Pixel.ttf" id="9_3tn2l"]
 [ext_resource type="Script" path="res://scripts/gui/mouse_watcher.gd" id="9_26tqm"]
@@ -85,6 +86,9 @@ script = ExtResource("3_xbf76")
 
 [node name="GameOver" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_dowce")
+
+[node name="GamePaused" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
+script = ExtResource("5_mvpn3")
 
 [node name="HistoryViewer" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("5_majhn")

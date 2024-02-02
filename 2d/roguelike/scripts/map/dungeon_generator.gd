@@ -3,8 +3,10 @@ extends Node
 
 
 const ENTITY_TYPES = {
-	"orc": preload("res://resources/entity_definition_orc.tres"),
-	"troll": preload("res://resources/entity_definition_troll.tres"),
+	"orc": preload("res://resources/entity_orc.tres"),
+	"troll": preload("res://resources/entity_troll.tres"),
+	"potion_of_healing": preload(
+			"res://resources/entity_potion_of_healing.tres")
 }
 
 @export_category("Map")
@@ -16,8 +18,9 @@ const ENTITY_TYPES = {
 @export var room_max_size: int = 10
 @export var room_min_size: int = 6
 
-@export_category("Monsters")
-@export var max_monsters_per_room = 2
+@export_category("Entities")
+@export var max_monsters_per_room: int = 2
+@export var max_items_per_room: int = 2
 
 var _rng := RandomNumberGenerator.new()
 
@@ -59,21 +62,30 @@ func generate_dungeon(player: Entity) -> MapData:
 
 func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 	for _i in _rng.randi_range(0, max_monsters_per_room):
-		var spawn_point := Vector2i(
-				_rng.randi_range(room.position.x + 1, room.end.x - 1),
-				_rng.randi_range(room.position.y + 1, room.end.y - 1))
-		var can_place = true
-		for entity in dungeon.entities:
-			if entity.grid_position == spawn_point:
-				can_place = false
-				break
-		if can_place:
+		var spawn_point := _get_entity_spawn_point(dungeon, room)
+		if spawn_point.x > -1:
 			var type: EntityDefinition
 			if _rng.randf() < 0.8:
 				type = ENTITY_TYPES.orc
 			else:
 				type = ENTITY_TYPES.troll
 			dungeon.entities.append(Entity.new(dungeon, spawn_point, type))
+	for _i in _rng.randi_range(0, max_items_per_room):
+		var spawn_point := _get_entity_spawn_point(dungeon, room)
+		if spawn_point.x > -1:
+			dungeon.entities.append(Entity.new(dungeon, spawn_point,
+					ENTITY_TYPES.potion_of_healing))
+
+
+func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:
+	var spawn_point := Vector2i(
+			_rng.randi_range(room.position.x + 1, room.end.x - 1),
+			_rng.randi_range(room.position.y + 1, room.end.y - 1))
+	for entity in dungeon.entities:
+		if entity.grid_position == spawn_point:
+			return Vector2i(-1, -1)
+
+	return spawn_point
 
 
 func _carve_tile(dungeon: MapData, x: int, y: int) -> void:

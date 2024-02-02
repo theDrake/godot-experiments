@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://8cpl7n345duw"]
+
+[ext_resource type="Script" path="res://scripts/gui/inventory.gd" id="1_8wuwi"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="1_b5jed"]
+[ext_resource type="FontFile" uid="uid://echw0a2twfcv" path="res://fonts/Kenney Pixel.ttf" id="2_fabpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45wf8"]
+atlas = ExtResource("1_b5jed")
+region = Rect2(768, 336, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kywjh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = SubResource("AtlasTexture_45wf8")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_o3obe"]
+font = ExtResource("2_fabpv")
+font_size = 32
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_m6rjp"]
+color = Color(1, 1, 1, 1)
+
+[node name="InventoryMenu" type="CanvasLayer"]
+script = ExtResource("1_8wuwi")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_kywjh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="InventoryTitle" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_o3obe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_m6rjp")
+
+[node name="InventoryList" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

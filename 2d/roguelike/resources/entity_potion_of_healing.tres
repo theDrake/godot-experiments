@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://d0icp07hy3spg"]
+
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_knm75"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_bddur"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_usable_healing_definition.gd" id="3_k3wi5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_127gv"]
+atlas = ExtResource("2_bddur")
+region = Rect2(656, 176, 16, 16)
+
+[sub_resource type="Resource" id="Resource_svj63"]
+script = ExtResource("3_k3wi5")
+healing_amount = 5
+
+[resource]
+script = ExtResource("1_knm75")
+name = "Potion of Healing"
+texture = SubResource("AtlasTexture_127gv")
+color = Color(1, 1, 1, 1)
+type = 1
+blocks_movement = false
+inventory_capacity = 0
+personality = 0
+usable_def = SubResource("Resource_svj63")

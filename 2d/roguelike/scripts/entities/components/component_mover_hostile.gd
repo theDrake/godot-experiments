@@ -5,10 +5,10 @@ extends ComponentMover
 var path: Array = []
 
 
-func perform() -> void:
+func perform() -> bool:
 	var target: Entity = get_map_data().get_player()
-	if target == null:
-		return
+	if not target:
+		return false
 
 	var target_grid_position: Vector2i = target.grid_position
 	var offset: Vector2i = target_grid_position - entity.grid_position

@@ -15,9 +15,12 @@ var grid_position: Vector2i:
 		grid_position = value
 		position = Grid.grid_to_world(value)
 var map_data: MapData
-var fighter_type: ComponentFighter
-var mover_type: ComponentMover
+var fighter: ComponentFighter
+var mover: ComponentMover
+var usable: ComponentUsable
+var inventory: ComponentInventory
 var blocks_movement: bool
+var is_player: bool = false
 
 var _def: EntityDefinition
 
@@ -37,16 +40,22 @@ func set_entity_type(entity_definition: EntityDefinition) -> void:
 	blocks_movement = _def.blocks_movement
 	texture = _def.texture
 	#modulate = _def.color
-	mover_type = null
+	mover = null
 	match _def.personality:
 		Personality.HOSTILE:
-			mover_type = ComponentMoverHostile.new()
-			add_child(mover_type)
-	fighter_type = null
+			mover = ComponentMoverHostile.new()
+			add_child(mover)
+	fighter = null
 	if _def.fighter_def:
-		fighter_type = ComponentFighter.new(_def.fighter_def)
-		add_child(fighter_type)
-
+		fighter = ComponentFighter.new(_def.fighter_def)
+		add_child(fighter)
+	if _def.usable_def:
+		if _def.usable_def is ComponentUsableHealingDefinition:
+			usable = ComponentUsableHealing.new(entity_definition.usable_def)
+			add_child(usable)
+	if _def.inventory_capacity > 0:
+		inventory = ComponentInventory.new(entity_definition.inventory_capacity)
+		add_child(inventory)
 
 func move(move_offset: Vector2i) -> void:
 	map_data.unregister_blocker(self)
@@ -55,4 +64,4 @@ func move(move_offset: Vector2i) -> void:
 
 
 func alive() -> bool:
-	return mover_type != null
+	return mover != null

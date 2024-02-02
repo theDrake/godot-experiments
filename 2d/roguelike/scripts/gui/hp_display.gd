@@ -8,8 +8,8 @@ extends MarginContainer
 
 func initialize(player: Entity) -> void:
 	await ready
-	player.fighter_type.hp_changed.connect(player_hp_changed)
-	player_hp_changed(player.fighter_type.hp, player.fighter_type.max_hp)
+	player.fighter.hp_changed.connect(player_hp_changed)
+	player_hp_changed(player.fighter.hp, player.fighter.max_hp)
 
 
 func player_hp_changed(hp: int, max_hp: int) -> void:

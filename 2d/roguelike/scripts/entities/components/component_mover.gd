@@ -2,8 +2,8 @@ class_name ComponentMover
 extends Component
 
 
-func perform() -> void:
-	pass
+func perform() -> bool:
+	return false
 
 
 func get_point_path_to(v: Vector2i) -> PackedVector2Array:

@@ -13,7 +13,6 @@ var hp: int:
 			die()
 var defense: int
 var power: int
-
 var death_texture: Texture
 #var death_color: Color
 
@@ -27,11 +26,23 @@ func _init(definition: ComponentFighterDefinition) -> void:
 	#death_color = definition.death_color
 
 
+func heal(amount: int) -> int:
+	if hp == max_hp or amount < 0:
+		return 0
+	amount = max(amount, amount + hp - max_hp)
+	hp += amount
+	return amount
+
+
+func take_damage(amount: int) -> void:
+	hp -= amount
+
+
 func die() -> void:
 	var death_message: String
 	var death_message_color: Color
-	if entity == get_map_data().get_player():
-		death_message = "Alas, thou hast perished!"
+	if entity.is_player:
+		death_message = "Alas, you have perished!"
 		death_message_color = GameColors.PLAYER_DEATH
 		SignalBus.player_died.emit()
 	else:
@@ -41,8 +52,8 @@ func die() -> void:
 
 	entity.texture = death_texture
 	#entity.modulate = death_color
-	entity.mover_type.queue_free()
-	entity.mover_type = null
+	entity.mover.queue_free()
+	entity.mover = null
 	entity.entity_name = "Remains of %s" % entity.entity_name
 	entity.blocks_movement = false
 	get_map_data().unregister_blocker(entity)
