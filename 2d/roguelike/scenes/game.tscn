@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://46anou4qqat5"]
+[gd_scene load_steps=22 format=3 uid="uid://46anou4qqat5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4v3re"]
 [ext_resource type="Script" path="res://scripts/input/input_handler.gd" id="2_f4cem"]
@@ -13,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://echw0a2twfcv" path="res://fonts/Kenney Pixel.ttf" id="9_3tn2l"]
 [ext_resource type="Script" path="res://scripts/gui/mouse_watcher.gd" id="9_26tqm"]
 [ext_resource type="Script" path="res://scripts/gui/hp_display.gd" id="9_pd2q4"]
+[ext_resource type="PackedScene" uid="uid://d4fdkvplljuoe" path="res://scenes/reticle.tscn" id="10_4wg7e"]
 [ext_resource type="Script" path="res://scripts/gui/message_log.gd" id="11_y6sul"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45wf8"]
@@ -81,8 +82,9 @@ script = ExtResource("1_4v3re")
 [node name="InputHandler" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game"]
 script = ExtResource("2_f4cem")
 
-[node name="Main" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
+[node name="Main" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler" node_paths=PackedStringArray("reticle")]
 script = ExtResource("3_xbf76")
+reticle = NodePath("../../Map/Reticle")
 
 [node name="GameOver" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/InputHandler"]
 script = ExtResource("3_dowce")
@@ -107,6 +109,8 @@ script = ExtResource("5_04jm3")
 [node name="Tiles" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 
 [node name="Entities" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
+
+[node name="Reticle" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/Map" instance=ExtResource("10_4wg7e")]
 
 [node name="MouseWatcher" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 script = ExtResource("9_26tqm")

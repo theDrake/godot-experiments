@@ -3,4 +3,4 @@ extends ActionUse
 
 
 func perform() -> bool:
-	return entity.inventory.drop(item)
+	return entity.inventory.drop(_item)

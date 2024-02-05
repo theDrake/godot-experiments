@@ -25,4 +25,4 @@ type = 2
 blocks_movement = true
 inventory_capacity = 0
 fighter_def = SubResource("Resource_6kg4g")
-personality = 2
+behavior = 2

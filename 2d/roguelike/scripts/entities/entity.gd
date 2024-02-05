@@ -2,8 +2,8 @@ class_name Entity
 extends Sprite2D
 
 
-enum Personality {NONE, FRIENDLY, HOSTILE, SCARED}
 enum EntityType {CORPSE, ITEM, ACTOR}
+enum Behavior {NONE, FRIENDLY, HOSTILE, SCARED, CONFUSED}
 
 var type: EntityType:
 	set(value):
@@ -41,21 +41,19 @@ func set_entity_type(entity_definition: EntityDefinition) -> void:
 	texture = _def.texture
 	#modulate = _def.color
 	mover = null
-	match _def.personality:
-		Personality.HOSTILE:
+	match _def.behavior:
+		Behavior.HOSTILE:
 			mover = ComponentMoverHostile.new()
 			add_child(mover)
 	fighter = null
 	if _def.fighter_def:
 		fighter = ComponentFighter.new(_def.fighter_def)
 		add_child(fighter)
-	if _def.usable_def:
-		if _def.usable_def is ComponentUsableHealingDefinition:
-			usable = ComponentUsableHealing.new(entity_definition.usable_def)
-			add_child(usable)
+	_add_usable(_def.usable_def)
 	if _def.inventory_capacity > 0:
 		inventory = ComponentInventory.new(entity_definition.inventory_capacity)
 		add_child(inventory)
+
 
 func move(move_offset: Vector2i) -> void:
 	map_data.unregister_blocker(self)
@@ -63,5 +61,21 @@ func move(move_offset: Vector2i) -> void:
 	map_data.register_blocker(self)
 
 
+func distance(other_grid_position: Vector2i) -> float:
+	return (other_grid_position - grid_position).length()
+
+
 func alive() -> bool:
 	return mover != null
+
+
+func _add_usable(usable_def: ComponentUsableDefinition) -> void:
+	if usable_def is ComponentHealingDefinition:
+		usable = ComponentHealing.new(usable_def)
+	elif usable_def is ComponentLightningDefinition:
+		usable = ComponentLightning.new(usable_def)
+	elif usable_def is ComponentConfusionDefinition:
+		usable = ComponentConfusion.new(usable_def)
+
+	if usable:
+		add_child(usable)

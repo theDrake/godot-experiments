@@ -19,28 +19,32 @@ func _physics_process(_delta: float) -> void:
 		button_pressed()
 
 
-func build_list(title_text: String, inventory: ComponentInventory) -> void:
+func build_list(title_text: String, inventory: ComponentInventory) -> bool:
 	if inventory.items.is_empty():
 		button_pressed.call_deferred()
 		MessageLog.send_message("Your inventory is empty.",
 				GameColors.IMPOSSIBLE)
-	else:
-		_title.text = title_text
-		for i in inventory.items.size():
-			_register_item(i, inventory.items[i])
-		_list.get_child(0).grab_focus()
-		show()
+		return false
+
+	_title.text = title_text
+	for i in inventory.items.size():
+		_register_item(i, inventory.items[i])
+	_list.get_child(0).grab_focus()
+	show()
+
+	return true
 
 
 func button_pressed(item: Entity = null) -> void:
+	await get_tree().physics_frame
 	item_selected.emit(item)
 	queue_free()
 
 
 func _register_item(index: int, item: Entity) -> void:
 	var item_button: Button = INVENTORY_BUTTON.instantiate()
-	var char: String = String.chr("a".unicode_at(0) + index)
-	item_button.text = "( %s ) %s" % [char, item.entity_name]
+	item_button.text = "( %s ) %s" % [String.chr("a".unicode_at(0) + index),
+			item.entity_name]
 	var shortcut_event := InputEventKey.new()
 	shortcut_event.keycode = KEY_A + index
 	item_button.shortcut = Shortcut.new()

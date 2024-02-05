@@ -2,11 +2,15 @@ class_name ComponentUsable
 extends Component
 
 
+var ranged: bool = false
+var effect_radius: int = 0
+
+
 func get_action(user: Entity) -> Action:
 	return ActionUse.new(user, entity)
 
 
-func activate(action: ActionUse) -> bool:
+func use(action: ActionUse) -> bool:
 	return false
 
 

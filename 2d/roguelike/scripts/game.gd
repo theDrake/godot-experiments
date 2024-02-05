@@ -21,16 +21,15 @@ func _ready() -> void:
 	_player.add_child(camera)
 	map.generate(_player)
 	map.update_fov(_player.grid_position)
-	MessageLog.send_message.bind(
-		"Welcome, adventurer, to yet another dungeon!",
-		GameColors.WELCOME_TEXT
-	).call_deferred()
+	MessageLog.send_message.bind("Welcome, adventurer!",
+			GameColors.WELCOME_TEXT).call_deferred()
+	camera.make_current.call_deferred()
 
 
 func _physics_process(_delta: float) -> void:
 	var action: Action = await _input_handler.get_action(_player)
 	if action:
-		var prev_grid_pos: Vector2i = _player.grid_position
+		#var prev_grid_pos: Vector2i = _player.grid_position
 		if action.perform():
 			_handle_enemy_turns()
 			map.update_fov(_player.grid_position)

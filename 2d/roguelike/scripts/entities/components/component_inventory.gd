@@ -6,9 +6,9 @@ var items: Array[Entity]
 var capacity: int
 
 
-func _init(capacity: int) -> void:
+func _init(inventory_capacity: int) -> void:
 	items = []
-	self.capacity = capacity
+	capacity = inventory_capacity
 
 
 func drop(item: Entity) -> bool:

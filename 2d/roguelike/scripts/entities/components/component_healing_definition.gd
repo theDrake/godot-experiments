@@ -1,4 +1,4 @@
-class_name ComponentUsableHealingDefinition
+class_name ComponentHealingDefinition
 extends ComponentUsableDefinition
 
 

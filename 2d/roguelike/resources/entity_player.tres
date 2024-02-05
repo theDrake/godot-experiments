@@ -25,4 +25,4 @@ type = 2
 blocks_movement = true
 inventory_capacity = 26
 fighter_def = SubResource("Resource_obms5")
-personality = 2
+behavior = 2

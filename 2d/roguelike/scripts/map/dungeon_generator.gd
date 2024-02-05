@@ -2,12 +2,15 @@ class_name DungeonGenerator
 extends Node
 
 
-const ENTITY_TYPES = {
-	"orc": preload("res://resources/entity_orc.tres"),
-	"troll": preload("res://resources/entity_troll.tres"),
-	"potion_of_healing": preload(
-			"res://resources/entity_potion_of_healing.tres")
-}
+const ENEMIES = [
+	preload("res://resources/entity_orc.tres"),
+	preload("res://resources/entity_troll.tres"),
+]
+const ITEMS = [
+	preload("res://resources/entity_potion_of_healing.tres"),
+	preload("res://resources/entity_scroll_of_lightning.tres"),
+	preload("res://resources/entity_scroll_of_confusion.tres"),
+]
 
 @export_category("Map")
 @export var map_width: int = 80
@@ -64,17 +67,13 @@ func _place_entities(dungeon: MapData, room: Rect2i) -> void:
 	for _i in _rng.randi_range(0, max_monsters_per_room):
 		var spawn_point := _get_entity_spawn_point(dungeon, room)
 		if spawn_point.x > -1:
-			var type: EntityDefinition
-			if _rng.randf() < 0.8:
-				type = ENTITY_TYPES.orc
-			else:
-				type = ENTITY_TYPES.troll
-			dungeon.entities.append(Entity.new(dungeon, spawn_point, type))
+			dungeon.entities.append(Entity.new(dungeon, spawn_point,
+					ENEMIES.pick_random()))
 	for _i in _rng.randi_range(0, max_items_per_room):
 		var spawn_point := _get_entity_spawn_point(dungeon, room)
 		if spawn_point.x > -1:
 			dungeon.entities.append(Entity.new(dungeon, spawn_point,
-					ENTITY_TYPES.potion_of_healing))
+					ITEMS.pick_random()))
 
 
 func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:

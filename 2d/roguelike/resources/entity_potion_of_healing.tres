@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_knm75"]
 [ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_bddur"]
-[ext_resource type="Script" path="res://scripts/entities/components/component_usable_healing_definition.gd" id="3_k3wi5"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_healing_definition.gd" id="3_k3wi5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_127gv"]
 atlas = ExtResource("2_bddur")
@@ -20,5 +20,5 @@ color = Color(1, 1, 1, 1)
 type = 1
 blocks_movement = false
 inventory_capacity = 0
-personality = 0
+behavior = 0
 usable_def = SubResource("Resource_svj63")

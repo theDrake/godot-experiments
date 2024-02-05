@@ -1,3 +1,2 @@
 class_name ComponentUsableDefinition
 extends Resource
-

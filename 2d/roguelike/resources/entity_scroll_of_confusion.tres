@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://tdkduwqwcmim"]
+
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="1_3xq60"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_81kut"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_confusion_definition.gd" id="3_m6624"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_127gv"]
+atlas = ExtResource("2_81kut")
+region = Rect2(528, 240, 16, 16)
+
+[sub_resource type="Resource" id="Resource_q4o2e"]
+script = ExtResource("3_m6624")
+num_turns = 10
+
+[resource]
+script = ExtResource("1_3xq60")
+name = "Scroll of Confusion"
+texture = SubResource("AtlasTexture_127gv")
+color = Color(1, 1, 1, 1)
+type = 1
+blocks_movement = false
+inventory_capacity = 0
+behavior = 0
+usable_def = SubResource("Resource_q4o2e")
