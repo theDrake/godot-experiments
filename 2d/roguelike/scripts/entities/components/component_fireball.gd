@@ -15,7 +15,7 @@ func use(action: ActionUse) -> bool:
 				GameColors.IMPOSSIBLE)
 		return false
 
-	var targets: Array[Entity]
+	var targets: Array[Entity] = []
 	for actor in map_data.get_actors():
 		if actor.distance(target_position) <= radius:
 			targets.append(actor)

@@ -28,7 +28,7 @@ func get_action(player: Entity) -> Action:
 	elif Input.is_action_just_pressed("inventory"):
 		return await use_item(player)
 	elif Input.is_action_just_pressed("drop"):
-		return ActionDrop.new(player, await get_item("Drop which item?",
+		return ActionDrop.new(player, await _get_item("Drop which item?",
 				player.inventory))
 	elif Input.is_action_just_pressed("look"):
 		await get_grid_position(player, 0)
@@ -44,7 +44,8 @@ func get_action(player: Entity) -> Action:
 
 
 func use_item(player: Entity) -> Action:
-	var item: Entity = await get_item("Use which item?", player.inventory, true)
+	var item: Entity = await _get_item("Use which item?", player.inventory,
+			true)
 	if not item:
 		return null
 	elif item.usable and item.usable.ranged:
@@ -57,7 +58,7 @@ func use_item(player: Entity) -> Action:
 	return ActionUse.new(player, item)
 
 
-func get_item(window_title: String, inventory: ComponentInventory,
+func _get_item(window_title: String, inventory: ComponentInventory,
 		stay_paused: bool = false) -> Entity:
 	var menu: InventoryMenu = INVENTORY.instantiate()
 	add_child(menu)

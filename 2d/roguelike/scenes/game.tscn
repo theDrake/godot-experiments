@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://46anou4qqat5"]
+[gd_scene load_steps=23 format=3 uid="uid://46anou4qqat5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4v3re"]
+[ext_resource type="Script" path="res://scripts/game_root.gd" id="1_lwahg"]
 [ext_resource type="Script" path="res://scripts/input/input_handler.gd" id="2_f4cem"]
 [ext_resource type="Script" path="res://scripts/map/dungeon_generator.gd" id="2_g3luc"]
 [ext_resource type="Script" path="res://scripts/input/input_game_over.gd" id="3_dowce"]
@@ -47,13 +48,14 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("9_3tn2l")
 font_size = 32
 
-[node name="InterfaceRoot" type="Control"]
+[node name="GameRoot" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lwahg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -73,10 +75,11 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(2, 2)
+size = Vector2i(1152, 536)
 render_target_update_mode = 4
 
 [node name="Game" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
 script = ExtResource("1_4v3re")
 
 [node name="InputHandler" type="Node" parent="VBoxContainer/SubViewportContainer/SubViewport/Game"]

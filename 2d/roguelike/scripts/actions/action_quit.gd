@@ -3,5 +3,5 @@ extends Action
 
 
 func perform() -> bool:
-	entity.get_tree().quit()
+	SignalBus.exit_requested.emit()
 	return false
