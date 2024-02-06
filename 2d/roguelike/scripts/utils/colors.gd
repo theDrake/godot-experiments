@@ -2,13 +2,14 @@ class_name GameColors
 extends RefCounted
 
 
-const WELCOME_TEXT = Color("20a0ff")
-const PLAYER_ATTACK = Color("e0e0e0")
-const ENEMY_ATTACK = Color("ffc0c0")
-const PLAYER_DEATH = Color("ff3030")
-const ENEMY_DEATH = Color("ffa030")
-const HEALTH_RECOVERED = Color("00ff00")
-const STATUS_EFFECT = Color("3fff3f")
-const INVALID = Color("ffff00")
-const IMPOSSIBLE = Color("808080")
-const ERROR = Color("ff4040")
+const WELCOME_TEXT := Color.YELLOW
+const PLAYER_ATTACK := Color.DARK_GOLDENROD
+const PLAYER_DEATH := Color.RED
+const ENEMY_ATTACK := Color.ORANGE_RED
+const ENEMY_DEATH := Color.GOLD
+const HEALTH_RECOVERED := Color.GREEN
+const STATUS_EFFECT := Color.VIOLET
+const INVALID := Color.SLATE_GRAY
+const IMPOSSIBLE := Color.DIM_GRAY
+const ERROR := Color.DARK_RED
+const DEFAULT := Color.GRAY

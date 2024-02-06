@@ -10,7 +10,9 @@ region = Rect2(528, 240, 16, 16)
 
 [sub_resource type="Resource" id="Resource_q4o2e"]
 script = ExtResource("3_m6624")
-num_turns = 10
+power = 10
+radius = 0
+ranged = true
 
 [resource]
 script = ExtResource("1_3xq60")

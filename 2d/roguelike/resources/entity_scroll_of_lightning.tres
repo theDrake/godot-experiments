@@ -10,8 +10,10 @@ region = Rect2(528, 240, 16, 16)
 
 [sub_resource type="Resource" id="Resource_rqs44"]
 script = ExtResource("3_gj4we")
-damage = 20
 max_range = 5.0
+power = 20
+radius = 0
+ranged = false
 
 [resource]
 script = ExtResource("1_f8e5q")

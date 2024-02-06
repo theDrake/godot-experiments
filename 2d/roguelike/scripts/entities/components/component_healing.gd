@@ -2,15 +2,12 @@ class_name ComponentHealing
 extends ComponentUsable
 
 
-var amount: int
-
-
 func _init(def: ComponentHealingDefinition) -> void:
-	amount = def.healing_amount
+	super._init(def)
 
 
 func use(action: ActionUse) -> bool:
-	var amount_recovered: int = action.entity.fighter.heal(amount)
+	var amount_recovered: int = action.entity.fighter.heal(power)
 	if amount_recovered > 0:
 		MessageLog.send_message("You consume the %s and recover %d HP." %
 				[entity.entity_name, amount_recovered],

@@ -49,7 +49,7 @@ func use_item(player: Entity) -> Action:
 		return null
 	elif item.usable and item.usable.ranged:
 		var target_position: Vector2i = await get_grid_position(player,
-				item.usable.effect_radius, true)
+				item.usable.radius, true)
 		if target_position.x > -1:
 			return ActionUse.new(player, item, target_position)
 		return null

@@ -73,7 +73,7 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(1152, 536)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Game" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport"]

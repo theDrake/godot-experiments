@@ -13,8 +13,8 @@ func perform() -> bool:
 			map_data.entities.erase(item)
 			item.get_parent().remove_child(item)
 			entity.inventory.items.append(item)
-			MessageLog.send_message(
-					"You got a %s." % item.entity_name, Color.WHITE)
+			MessageLog.send_message("You got a %s." % item.entity_name,
+					GameColors.DEFAULT)
 			return true
 
 	MessageLog.send_message("There's nothing here to get.",

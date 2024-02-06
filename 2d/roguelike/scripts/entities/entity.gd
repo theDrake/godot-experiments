@@ -61,8 +61,9 @@ func move(move_offset: Vector2i) -> void:
 	map_data.register_blocker(self)
 
 
-func distance(other_grid_position: Vector2i) -> float:
-	return (other_grid_position - grid_position).length()
+func distance(other_grid_position: Vector2i) -> int:
+	var vector: Vector2i = other_grid_position - grid_position
+	return maxi(abs(vector.x), abs(vector.y))
 
 
 func alive() -> bool:
@@ -74,6 +75,8 @@ func _add_usable(usable_def: ComponentUsableDefinition) -> void:
 		usable = ComponentHealing.new(usable_def)
 	elif usable_def is ComponentLightningDefinition:
 		usable = ComponentLightning.new(usable_def)
+	elif usable_def is ComponentFireballDefinition:
+		usable = ComponentFireball.new(usable_def)
 	elif usable_def is ComponentConfusionDefinition:
 		usable = ComponentConfusion.new(usable_def)
 

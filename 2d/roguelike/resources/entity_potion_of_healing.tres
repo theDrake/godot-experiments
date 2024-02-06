@@ -10,7 +10,9 @@ region = Rect2(656, 176, 16, 16)
 
 [sub_resource type="Resource" id="Resource_svj63"]
 script = ExtResource("3_k3wi5")
-healing_amount = 5
+power = 5
+radius = 0
+ranged = false
 
 [resource]
 script = ExtResource("1_knm75")

@@ -2,12 +2,8 @@ class_name ComponentConfusion
 extends ComponentUsable
 
 
-var _num_turns: int
-
-
 func _init(def: ComponentConfusionDefinition) -> void:
-	_num_turns = def.num_turns
-	ranged = true
+	super._init(def)
 
 
 func use(action: ActionUse) -> bool:
@@ -27,7 +23,7 @@ func use(action: ActionUse) -> bool:
 		return false
 	MessageLog.send_message("%s is confused!" % target.entity_name,
 			GameColors.STATUS_EFFECT)
-	target.add_child(ComponentMoverConfused.new(_num_turns))
+	target.add_child(ComponentMoverConfused.new(power))
 	consume(user)
 
 	return true

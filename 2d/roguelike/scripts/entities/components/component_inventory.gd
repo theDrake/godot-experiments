@@ -21,6 +21,7 @@ func drop(item: Entity) -> bool:
 	map_data.entity_placed.emit(item)
 	item.map_data = map_data
 	item.grid_position = entity.grid_position
-	MessageLog.send_message("You dropped a %s." % item.entity_name, Color.WHITE)
+	MessageLog.send_message("You dropped a %s." % item.entity_name,
+			GameColors.DEFAULT)
 
 	return true

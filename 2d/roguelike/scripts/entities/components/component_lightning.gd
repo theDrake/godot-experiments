@@ -2,19 +2,18 @@ class_name ComponentLightning
 extends ComponentUsable
 
 
-var damage: int
-var max_range: float
+var _max_range: int
 
 
-func _init(definition: ComponentLightningDefinition) -> void:
-	damage = definition.damage
-	max_range = definition.max_range
+func _init(def: ComponentLightningDefinition) -> void:
+	super._init(def)
+	_max_range = def.max_range
 
 
 func use(action: ActionUse) -> bool:
 	var user: Entity = action.entity
 	var map_data: MapData = user.map_data
-	var closest_distance: float = max_range + 1
+	var closest_distance: float = _max_range + 1
 	var target: Entity
 	for actor in map_data.get_actors():
 		if actor != user and map_data.get_tile(actor.grid_position).in_view:
@@ -24,8 +23,8 @@ func use(action: ActionUse) -> bool:
 				closest_distance = distance
 	if target:
 		MessageLog.send_message("Lightning strikes %s for %d damage!" %
-				[target.entity_name, damage], Color.WHITE)
-		target.fighter.take_damage(damage)
+				[target.entity_name, power], GameColors.PLAYER_ATTACK)
+		target.fighter.take_damage(power)
 		consume(user)
 		return true
 

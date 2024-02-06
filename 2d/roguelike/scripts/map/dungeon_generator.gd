@@ -9,6 +9,7 @@ const ENEMIES = [
 const ITEMS = [
 	preload("res://resources/entity_potion_of_healing.tres"),
 	preload("res://resources/entity_scroll_of_lightning.tres"),
+	preload("res://resources/entity_scroll_of_fireball.tres"),
 	preload("res://resources/entity_scroll_of_confusion.tres"),
 ]
 
@@ -23,7 +24,7 @@ const ITEMS = [
 
 @export_category("Entities")
 @export var max_monsters_per_room: int = 2
-@export var max_items_per_room: int = 2
+@export var max_items_per_room: int = 4
 
 var _rng := RandomNumberGenerator.new()
 

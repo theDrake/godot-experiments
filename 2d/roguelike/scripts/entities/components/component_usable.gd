@@ -2,8 +2,15 @@ class_name ComponentUsable
 extends Component
 
 
-var ranged: bool = false
-var effect_radius: int = 0
+var power: int
+var radius: int
+var ranged: bool
+
+
+func _init(def: ComponentUsableDefinition) -> void:
+	power = def.power
+	radius = def.radius
+	ranged = def.ranged
 
 
 func get_action(user: Entity) -> Action:

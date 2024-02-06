@@ -18,7 +18,7 @@ func _init(turns: int) -> void:
 func perform() -> bool:
 	if turns_remaining <= 0:
 		MessageLog.send_message("%s is no longer confused." %
-				entity.entity_name, Color.WHITE)
+				entity.entity_name, GameColors.STATUS_EFFECT)
 		entity.mover = previous_behavior
 		queue_free()
 		return true
