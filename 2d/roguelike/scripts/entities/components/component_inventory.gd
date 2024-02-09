@@ -25,3 +25,22 @@ func drop(item: Entity) -> bool:
 			GameColors.DEFAULT)
 
 	return true
+
+
+func get_save_data() -> Dictionary:
+	var save_data: Dictionary = {
+		"capacity": capacity,
+		"items": []
+	}
+	for i in items:
+		save_data["items"].append(i.get_save_data())
+
+	return save_data
+
+
+func restore(save_data: Dictionary) -> void:
+	capacity = save_data["capacity"]
+	for i in save_data["items"]:
+		var item: Entity = Entity.new(null, Vector2i(-1, -1), "")
+		item.restore(i)
+		items.append(item)

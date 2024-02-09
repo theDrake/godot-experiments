@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4m3kypc00a78"]
+[gd_scene load_steps=18 format=3 uid="uid://d4m3kypc00a78"]
 
 [ext_resource type="Texture2D" uid="uid://dwv44y2qjl2nq" path="res://art/menu_background.png" id="1_grjg0"]
 [ext_resource type="Script" path="res://scripts/gui/main_menu.gd" id="1_jmcto"]
@@ -46,8 +46,18 @@ device = -1
 keycode = 81
 unicode = 113
 
+[sub_resource type="InputEventKey" id="InputEventKey_r042r"]
+device = -1
+ctrl_pressed = true
+keycode = 81
+unicode = 113
+
+[sub_resource type="InputEventKey" id="InputEventKey_k5jdj"]
+device = -1
+keycode = 4194305
+
 [sub_resource type="Shortcut" id="Shortcut_qcg0b"]
-events = [SubResource("InputEventKey_drava")]
+events = [SubResource("InputEventKey_drava"), SubResource("InputEventKey_r042r"), SubResource("InputEventKey_k5jdj")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_smb82"]
 font = ExtResource("2_f1hxg")

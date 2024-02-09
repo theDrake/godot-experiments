@@ -3,7 +3,11 @@ extends ComponentMover
 
 
 var previous_behavior: ComponentMover
-var turns_remaining: int
+var _turns_remaining: int
+
+
+func _init(turns: int) -> void:
+	_turns_remaining = turns
 
 
 func _ready() -> void:
@@ -11,18 +15,21 @@ func _ready() -> void:
 	entity.mover = self
 
 
-func _init(turns: int) -> void:
-	turns_remaining = turns
-
-
 func perform() -> bool:
-	if turns_remaining <= 0:
-		MessageLog.send_message("%s is no longer confused." %
+	if _turns_remaining <= 0:
+		MessageLog.send_message("%s is no longer confused!" %
 				entity.entity_name, GameColors.STATUS_EFFECT)
 		entity.mover = previous_behavior
 		queue_free()
 		return true
-	turns_remaining -= 1
+	_turns_remaining -= 1
 	var direction: Vector2i = InputMain.random_direction()
 
 	return ActionBump.new(entity, direction.x, direction.y).perform()
+
+
+func get_save_data() -> Dictionary:
+	return {
+		"behavior": "ComponentMoverConfused",
+		"turns_remaining": _turns_remaining
+	}

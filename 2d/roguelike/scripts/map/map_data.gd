@@ -4,10 +4,6 @@ extends RefCounted
 
 signal entity_placed(entity)
 
-const TILE_TYPES = {
-	"floor": preload("res://resources/tile_floor.tres"),
-	"wall": preload("res://resources/tile_wall.tres"),
-}
 const BLOCKER_PATHFINDING_WEIGHT: float = 10.0
 
 var width: int
@@ -29,7 +25,7 @@ func init_tiles() -> void:
 	for y in height:
 		for x in width:
 			var tile_position := Vector2i(x, y)
-			var tile := Tile.new(tile_position, TILE_TYPES.wall)
+			var tile := Tile.new(tile_position, Tile.TileType.WALL)
 			tiles.append(tile)
 
 
@@ -114,3 +110,34 @@ func in_bounds(coordinate: Vector2i) -> bool:
 			0 <= coordinate.x and coordinate.x < width
 			and 0 <= coordinate.y and coordinate.y < height
 	)
+
+
+func get_save_data() -> Dictionary:
+	var save_data := {
+		"width": width,
+		"height": height,
+		"tiles": [],
+		"entities": [],
+	}
+	for e in entities:
+		save_data["entities"].append(e.get_save_data())
+	for t in tiles:
+		save_data["tiles"].append(t.get_save_data())
+
+	return save_data
+
+
+func restore(save_data: Dictionary) -> void:
+	width = save_data["width"]
+	height = save_data["height"]
+	init_tiles()
+	for i in tiles.size():
+		tiles[i].restore(save_data["tiles"][i])
+	init_pathfinder()
+	entities = []
+	for entity_data in save_data["entities"]:
+		var new_entity := Entity.new(self, Vector2i.ZERO, "")
+		new_entity.restore(entity_data)
+		entities.append(new_entity)
+	entities[0].is_player = true
+	entities[0].map_data = self

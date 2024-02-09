@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Roguelike"
+config/tags=PackedStringArray("2d", "procgen", "roguelike")
 run/main_scene="res://scenes/game_manager.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://roguelike.png"

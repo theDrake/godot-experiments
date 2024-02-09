@@ -14,6 +14,10 @@ var data: MapData
 
 func generate(player: Entity) -> void:
 	data = _generator.generate_dungeon(player)
+	populate()
+
+
+func populate() -> void:
 	data.entity_placed.connect(_entities.add_child)
 	_place_tiles()
 	_place_entities()

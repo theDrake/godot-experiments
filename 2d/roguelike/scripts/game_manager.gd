@@ -29,3 +29,7 @@ func load_scene(scene: PackedScene) -> Node:
 func _on_game_requested(try_load: bool) -> void:
 	var game: GameRoot = load_scene(GAME_SCENE)
 	game.main_menu_requested.connect(load_main_menu)
+	if try_load:
+		game.load_game()
+	else:
+		game.new_game()

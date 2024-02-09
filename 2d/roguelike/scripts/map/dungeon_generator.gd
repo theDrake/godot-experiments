@@ -3,14 +3,14 @@ extends Node
 
 
 const ENEMIES = [
-	preload("res://resources/entity_orc.tres"),
-	preload("res://resources/entity_troll.tres"),
+	"Orc",
+	"Troll",
 ]
 const ITEMS = [
-	preload("res://resources/entity_potion_of_healing.tres"),
-	preload("res://resources/entity_scroll_of_lightning.tres"),
-	preload("res://resources/entity_scroll_of_fireball.tres"),
-	preload("res://resources/entity_scroll_of_confusion.tres"),
+	"Potion of Healing",
+	"Scroll of Lightning",
+	"Scroll of Fireball",
+	"Scroll of Confusion",
 ]
 
 @export_category("Map")
@@ -89,7 +89,7 @@ func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:
 
 
 func _carve_tile(dungeon: MapData, x: int, y: int) -> void:
-		dungeon.get_tile(Vector2i(x, y)).set_tile_type(dungeon.TILE_TYPES.floor)
+		dungeon.get_tile(Vector2i(x, y)).set_tile_type(Tile.TileType.FLOOR)
 
 
 func _carve_room(dungeon: MapData, room: Rect2i) -> void:

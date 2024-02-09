@@ -2,17 +2,16 @@ class_name HPDisplay
 extends MarginContainer
 
 
-@onready var hp_bar: ProgressBar = $"%HPBar"
-@onready var hp_label: Label = $"%HPLabel"
+@onready var _hp_bar: ProgressBar = $"%HPBar"
+@onready var _hp_label: Label = $"%HPLabel"
 
 
-func initialize(player: Entity) -> void:
-	await ready
-	player.fighter.hp_changed.connect(player_hp_changed)
-	player_hp_changed(player.fighter.hp, player.fighter.max_hp)
+func _on_player_created(player: Entity) -> void:
+	player.fighter.hp_changed.connect(_on_player_hp_changed)
+	_on_player_hp_changed(player.fighter.hp, player.fighter.max_hp)
 
 
-func player_hp_changed(hp: int, max_hp: int) -> void:
-	hp_bar.max_value = max_hp
-	hp_bar.value = hp
-	hp_label.text = "HP: %d/%d" % [hp, max_hp]
+func _on_player_hp_changed(hp: int, max_hp: int) -> void:
+	_hp_bar.max_value = max_hp
+	_hp_bar.value = hp
+	_hp_label.text = "HP: %d/%d" % [hp, max_hp]

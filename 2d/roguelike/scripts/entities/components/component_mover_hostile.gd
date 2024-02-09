@@ -29,3 +29,7 @@ func perform() -> bool:
 		return ActionMove.new(entity, move_offset.x, move_offset.y).perform()
 
 	return ActionWait.new(entity).perform()
+
+
+func get_save_data() -> Dictionary:
+	return {"behavior": "ComponentMoverHostile"}

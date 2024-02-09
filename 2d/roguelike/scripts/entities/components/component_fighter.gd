@@ -10,7 +10,11 @@ var hp: int:
 		hp = clampi(value, 0, max_hp)
 		hp_changed.emit(hp, max_hp)
 		if hp <= 0:
-			die()
+			var die_silently: bool = false
+			if not is_inside_tree():
+				die_silently = true
+				await ready
+			die(die_silently)
 var defense: int
 var power: int
 var death_texture: Texture
@@ -38,23 +42,40 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 
 
-func die() -> void:
-	var death_message: String
-	var death_message_color: Color
-	if entity.is_player:
-		death_message = "Alas, you have perished!"
-		death_message_color = GameColors.PLAYER_DEATH
-		SignalBus.player_died.emit()
-	else:
-		death_message = "%s is dead!" % entity.entity_name
-		death_message_color = GameColors.ENEMY_DEATH
-	MessageLog.send_message(death_message, death_message_color)
+func die(silently: bool = false) -> void:
+	if not silently:
+		var death_message: String
+		var death_message_color: Color
+		if entity.is_player:
+			death_message = "Alas, you have perished!"
+			death_message_color = GameColors.PLAYER_DEATH
+			SignalBus.player_died.emit()
+		else:
+			death_message = "%s is dead!" % entity.entity_name
+			death_message_color = GameColors.ENEMY_DEATH
+		MessageLog.send_message(death_message, death_message_color)
 
 	entity.texture = death_texture
 	#entity.modulate = death_color
 	entity.mover.queue_free()
 	entity.mover = null
-	entity.entity_name = "Remains of %s" % entity.entity_name
+	entity.entity_name = Entity.CORPSE_TEXT + entity.entity_name
 	entity.blocks_movement = false
 	get_map_data().unregister_blocker(entity)
 	entity.type = Entity.EntityType.CORPSE
+
+
+func get_save_data() -> Dictionary:
+	return {
+		"max_hp": max_hp,
+		"hp": hp,
+		"defense": defense,
+		"power": power,
+	}
+
+
+func restore(save_data: Dictionary) -> void:
+	max_hp = save_data["max_hp"]
+	hp = save_data["hp"]
+	defense = save_data["defense"]
+	power = save_data["power"]
