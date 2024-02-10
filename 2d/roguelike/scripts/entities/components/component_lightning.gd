@@ -24,10 +24,12 @@ func use(action: ActionUse) -> bool:
 	if target:
 		MessageLog.send_message("Lightning strikes %s for %d damage!" %
 				[target.entity_name, power], GameColors.PLAYER_ATTACK)
-		target.fighter.take_damage(power)
+		target.fighter.hp -= power
 		consume(user)
+
 		return true
 
 	MessageLog.send_message("No enemy is close enough to strike.",
 			GameColors.IMPOSSIBLE)
+
 	return false

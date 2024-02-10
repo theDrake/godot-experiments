@@ -28,7 +28,7 @@ func use(action: ActionUse) -> bool:
 	for target in targets:
 		MessageLog.send_message("Flames engulf %s for %d damage!" %
 				[target.entity_name, power], GameColors.PLAYER_ATTACK)
-		target.fighter.take_damage(power)
+		target.fighter.hp -= power
 	consume(action.entity)
 
 	return true

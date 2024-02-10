@@ -16,7 +16,7 @@ func perform() -> bool:
 	var attack_description: String = "%s attacks %s" % [entity.entity_name,
 			target.entity_name]
 	attack_description += " for %d damage." % damage
-	target.fighter.hp -= damage
 	MessageLog.send_message(attack_description, attack_color)
+	target.fighter.hp -= damage
 
 	return true

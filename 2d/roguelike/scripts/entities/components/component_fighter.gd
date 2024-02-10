@@ -38,10 +38,6 @@ func heal(amount: int) -> int:
 	return amount
 
 
-func take_damage(amount: int) -> void:
-	hp -= amount
-
-
 func die(silently: bool = false) -> void:
 	if not silently:
 		var death_message: String
