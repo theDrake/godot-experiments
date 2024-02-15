@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://eq0qq2rwl3p5"]
+
+[ext_resource type="PackedScene" uid="uid://nrk8ui6hw8sx" path="res://models/wood-structure.glb" id="1_65kjg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e5uhd"]
+size = Vector3(0.15, 1, 0.15)
+
+[node name="WoodStructure" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426025, 0.5, 0.423592)
+shape = SubResource("BoxShape3D_e5uhd")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425039, 0.5, 0.423592)
+shape = SubResource("BoxShape3D_e5uhd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.426025, 0.5, -0.425707)
+shape = SubResource("BoxShape3D_e5uhd")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425039, 0.5, -0.425707)
+shape = SubResource("BoxShape3D_e5uhd")
+
+[node name="wood-structure2" parent="." instance=ExtResource("1_65kjg")]

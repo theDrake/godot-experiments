@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://fnbdg1o52rql"]
+
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_5cshq"]
+[ext_resource type="PackedScene" uid="uid://c83xst8a5ee3a" path="res://models/coin.glb" id="1_wsjmy"]
+
+[node name="Coin" type="Node3D"]
+script = ExtResource("1_5cshq")
+
+[node name="coin2" parent="." instance=ExtResource("1_wsjmy")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

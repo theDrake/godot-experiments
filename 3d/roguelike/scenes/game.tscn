@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://80gcpcs04860"]
+
+[ext_resource type="Script" path="res://scripts/view.gd" id="1_2arfa"]
+[ext_resource type="PackedScene" uid="uid://c2dur8eugcxex" path="res://scenes/hero.tscn" id="1_danay"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_jcbhu"]
+[ext_resource type="PackedScene" uid="uid://btv3p6350hpqo" path="res://scenes/starting_room.tscn" id="3_s84me"]
+[ext_resource type="Script" path="res://scripts/dungeon.gd" id="4_vwxnr"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_jcbhu")
+
+[node name="Hero" parent="." node_paths=PackedStringArray("view") instance=ExtResource("1_danay")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+view = NodePath("../View")
+
+[node name="View" type="Node3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(-1, 6.18173e-08, -6.18172e-08, 0, 0.707107, 0.707106, 8.74227e-08, 0.707107, -0.707106, 1, 0, 1)
+script = ExtResource("1_2arfa")
+target = NodePath("../Hero")
+
+[node name="Camera3D" type="Camera3D" parent="View"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+current = true
+fov = 60.0
+
+[node name="Dungeon" type="Node3D" parent="." node_paths=PackedStringArray("hero")]
+script = ExtResource("4_vwxnr")
+hero = NodePath("../Hero")
+
+[node name="StartingRoom" parent="Dungeon" instance=ExtResource("3_s84me")]
+
+[connection signal="died" from="Hero" to="." method="_on_hero_died"]
+[connection signal="gate_opened" from="Hero" to="." method="_on_gate_opened"]
