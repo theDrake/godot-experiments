@@ -2,6 +2,8 @@
 
 A simple 3D fantasy [roguelike](https://en.wikipedia.org/wiki/Roguelike), built using [Godot 4.2](https://godotengine.org/download/). Art assets courtesy of [Kenney's Mini Dungeon](https://www.kenney.nl/assets/mini-dungeon) ([CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)).
 
+![Screenshot](3d_roguelike.png)
+
 ## Controls
 
 Key | Action
