@@ -14,11 +14,11 @@ const ITEMS = [
 ]
 
 @export_category("Map")
-@export var map_width: int = 80
-@export var map_height: int = 45
+@export var map_width: int = 40
+@export var map_height: int = 40
 
 @export_category("Rooms")
-@export var max_rooms: int = 30
+@export var max_rooms: int = 10
 @export var room_max_size: int = 10
 @export var room_min_size: int = 6
 
@@ -33,8 +33,9 @@ func _ready() -> void:
 	_rng.randomize()
 
 
-func generate_dungeon(player: Entity) -> MapData:
+func generate_dungeon(player: Entity, depth: int) -> MapData:
 	var dungeon := MapData.new(map_width, map_height)
+	dungeon.current_depth = depth
 	dungeon.entities.append(player)
 	var rooms: Array[Rect2i] = []
 	for _try_room in max_rooms:
@@ -59,9 +60,25 @@ func generate_dungeon(player: Entity) -> MapData:
 					new_room.get_center())
 		_place_entities(dungeon, new_room)
 		rooms.append(new_room)
+	for i in range(1, rooms.size()):
+		if _add_stairs_down(dungeon, rooms[-i]):
+			break
 	dungeon.init_pathfinder()
 
 	return dungeon
+
+
+func _add_stairs_down(dungeon: MapData, room: Rect2i) -> bool:
+	var center: Vector2i = room.get_center()
+	var pos: Vector2i = center
+	for _num_tries in InputMain.DIRECTIONS.size():
+		var t: Tile = dungeon.get_tile(pos)
+		if not dungeon.get_entity_at(pos):
+			t.set_tile_type(Tile.TileType.STAIRS_DOWN)
+			return true
+		pos = center + InputMain.random_direction()
+
+	return false
 
 
 func _place_entities(dungeon: MapData, room: Rect2i) -> void:

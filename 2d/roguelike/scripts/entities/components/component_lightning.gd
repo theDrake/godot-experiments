@@ -30,6 +30,6 @@ func use(action: ActionUse) -> bool:
 		return true
 
 	MessageLog.send_message("No enemy is close enough to strike.",
-			GameColors.IMPOSSIBLE)
+			GameColors.INVALID)
 
 	return false

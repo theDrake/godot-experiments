@@ -14,12 +14,11 @@ func use(action: ActionUse) -> bool:
 				GameColors.IMPOSSIBLE)
 		return false
 	elif not target:
-		MessageLog.send_message("You must target an enemy.",
-				GameColors.IMPOSSIBLE)
+		MessageLog.send_message("You must target an enemy.", GameColors.INVALID)
 		return false
 	elif target == user:
 		MessageLog.send_message("You cannot confuse yourself!",
-				GameColors.IMPOSSIBLE)
+				GameColors.INVALID)
 		return false
 	MessageLog.send_message("%s is confused." % target.entity_name,
 			GameColors.STATUS_EFFECT)

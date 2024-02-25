@@ -5,16 +5,17 @@ extends Node2D
 signal player_created(player)
 
 const SAVE_FILE: String = "user://roguelike_save.dat"
+const LEVEL_UP_MENU: PackedScene = preload("res://scenes/level_up_menu.tscn")
 
 @onready var map: Map = $Map
 
 @onready var _player: Entity
 @onready var _input_handler: InputHandler = $InputHandler
-@onready var _cam: Camera2D = $Camera2D
+@onready var _cam: Camera2D = $PlayerCamera
 
 
 func _ready() -> void:
-	SignalBus.exit_requested.connect(save_game)
+	SignalBus.save_requested.connect(save_game)
 
 
 func new_game() -> void:
@@ -22,7 +23,8 @@ func new_game() -> void:
 	player_created.emit(_player)
 	remove_child(_cam)
 	_player.add_child(_cam)
-	map.generate(_player)
+	_player.fighter.level_up_required.connect(_on_level_up_requested)
+	map.generate(_player, 0)
 	map.update_fov(_player.grid_position)
 	MessageLog.send_message.bind("Welcome, adventurer!",
 			GameColors.WELCOME_TEXT).call_deferred()
@@ -44,7 +46,8 @@ func load_game() -> bool:
 	_player = map.data.get_player()
 	remove_child(_cam)
 	_player.add_child(_cam)
-	map.populate()
+	_player.fighter.level_up_required.connect(_on_level_up_requested)
+	map.populate(map.data.current_depth)
 	player_created.emit(_player)
 	map.update_fov(_player.grid_position)
 	MessageLog.send_message.bind("Welcome back, adventurer!",
@@ -68,14 +71,23 @@ func save_game() -> bool:
 
 func _physics_process(_delta: float) -> void:
 	var action: Action = await _input_handler.get_action(_player)
-	if action:
-		#var prev_grid_pos: Vector2i = _player.grid_position
-		if action.perform():
-			_handle_enemy_turns()
-			map.update_fov(_player.grid_position)
+	if action and action.perform():
+		_handle_enemy_turns()
+		map.update_fov(_player.grid_position)
 
 
 func _handle_enemy_turns() -> void:
-	for entity in map.data.get_actors():
-		if entity.alive() and entity != _player:
-			entity.mover.perform()
+	var actors: Array[Entity] = map.data.get_actors()
+	actors.shuffle()
+	for actor in actors:
+		if actor.alive() and actor != _player:
+			actor.mover.perform()
+
+
+func _on_level_up_requested() -> void:
+	var level_up_menu: LevelUpMenu = LEVEL_UP_MENU.instantiate()
+	add_child(level_up_menu)
+	level_up_menu.init_buttons(_player)
+	set_physics_process(false)
+	await level_up_menu.level_up_completed
+	set_physics_process.bind(true).call_deferred()

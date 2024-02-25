@@ -22,7 +22,7 @@ func use(action: ActionUse) -> bool:
 	if targets.is_empty() or (targets.size() == 1 and targets[0] == \
 			map_data.get_player()):
 		MessageLog.send_message("No enemies within blast radius.",
-				GameColors.IMPOSSIBLE)
+				GameColors.INVALID)
 		return false
 
 	for target in targets:

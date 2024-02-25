@@ -4,11 +4,13 @@ extends Sprite2D
 
 enum TileType {
 	FLOOR,
+	STAIRS_DOWN,
 	WALL,
 }
 
 const TILES = [
 	preload("res://resources/tile_floor.tres"),
+	preload("res://resources/tile_stairs_down.tres"),
 	preload("res://resources/tile_wall.tres"),
 ]
 
@@ -23,8 +25,8 @@ var explored: bool = false:
 		explored = value
 		if explored and not visible:
 			visible = true
+var type: TileType
 
-var _type: TileType
 var _def: TileDefinition
 
 
@@ -36,8 +38,8 @@ func _init(grid_position: Vector2i, tile_type: int) -> void:
 
 
 func set_tile_type(tile_type: TileType) -> void:
-	_type = tile_type
-	_def = TILES[_type]
+	type = tile_type
+	_def = TILES[type]
 	texture = _def.texture
 	modulate = _def.color_dark
 
@@ -52,7 +54,7 @@ func blocks_sight() -> bool:
 
 func get_save_data() -> Dictionary:
 	return {
-		"type": _type,
+		"type": type,
 		"explored": explored,
 	}
 

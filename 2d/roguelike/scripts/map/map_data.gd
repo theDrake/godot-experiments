@@ -8,6 +8,7 @@ const BLOCKER_PATHFINDING_WEIGHT: float = 10.0
 
 var width: int
 var height: int
+var current_depth: int
 var tiles: Array[Tile]
 var entities: Array[Entity]
 var pathfinder: AStarGrid2D
@@ -73,9 +74,9 @@ func get_items() -> Array[Entity]:
 	return items
 
 
-func get_actor_at(location: Vector2i) -> Entity:
+func get_actor_at(grid_position: Vector2i) -> Entity:
 	for actor in get_actors():
-		if actor.grid_position == location:
+		if actor.grid_position == grid_position:
 			return actor
 
 	return null
@@ -85,6 +86,14 @@ func get_blocker_at(grid_position: Vector2i) -> Entity:
 	for entity in entities:
 		if entity.blocks_movement and entity.grid_position == grid_position:
 			return entity
+
+	return null
+
+
+func get_entity_at(grid_position: Vector2i) -> Entity:
+	for e in entities:
+		if e.grid_position == grid_position:
+			return e
 
 	return null
 
@@ -116,6 +125,7 @@ func get_save_data() -> Dictionary:
 	var save_data := {
 		"width": width,
 		"height": height,
+		"current_depth": current_depth,
 		"tiles": [],
 		"entities": [],
 	}
@@ -130,6 +140,7 @@ func get_save_data() -> Dictionary:
 func restore(save_data: Dictionary) -> void:
 	width = save_data["width"]
 	height = save_data["height"]
+	current_depth = save_data["current_depth"]
 	init_tiles()
 	for i in tiles.size():
 		tiles[i].restore(save_data["tiles"][i])

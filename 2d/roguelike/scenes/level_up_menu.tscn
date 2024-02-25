@@ -1,0 +1,111 @@
+[gd_scene load_steps=16 format=3 uid="uid://2ulcswjbw84a"]
+
+[ext_resource type="PackedScene" uid="uid://dii472yf242hh" path="res://scenes/inventory_button.tscn" id="1_0yatj"]
+[ext_resource type="Script" path="res://scripts/gui/level_up_menu.gd" id="1_c6a0k"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="1_lrlhj"]
+[ext_resource type="FontFile" uid="uid://echw0a2twfcv" path="res://fonts/Kenney Pixel.ttf" id="2_mvh5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45wf8"]
+atlas = ExtResource("1_lrlhj")
+region = Rect2(768, 336, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dnjtu"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = SubResource("AtlasTexture_45wf8")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vg3y6"]
+font = ExtResource("2_mvh5q")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykeug"]
+font = ExtResource("2_mvh5q")
+font_size = 32
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_a5ekj"]
+color = Color(1, 1, 1, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_8fngm"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_35bal"]
+events = [SubResource("InputEventKey_8fngm")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4h86h"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_mjslk"]
+events = [SubResource("InputEventKey_4h86h")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_tp3fl"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_0w4d6"]
+events = [SubResource("InputEventKey_tp3fl")]
+
+[node name="LevelUpMenu" type="CanvasLayer"]
+script = ExtResource("1_c6a0k")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dnjtu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "LEVEL UP"
+label_settings = SubResource("LabelSettings_vg3y6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Increase an attribute:"
+label_settings = SubResource("LabelSettings_ykeug")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_a5ekj")
+
+[node name="HealthUpgradeButton" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_0yatj")]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_35bal")
+
+[node name="PowerUpgradeButton" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_0yatj")]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_mjslk")
+
+[node name="DefenseUpgradeButton" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_0yatj")]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_0w4d6")
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HealthUpgradeButton" to="." method="_on_health_upgrade_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/DefenseUpgradeButton" to="." method="_on_defense_upgrade_button_pressed"]

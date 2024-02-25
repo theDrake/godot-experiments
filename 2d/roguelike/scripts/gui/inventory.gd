@@ -22,8 +22,7 @@ func _physics_process(_delta: float) -> void:
 func build_list(title_text: String, inventory: ComponentInventory) -> bool:
 	if inventory.items.is_empty():
 		button_pressed.call_deferred()
-		MessageLog.send_message("Your inventory is empty.",
-				GameColors.IMPOSSIBLE)
+		MessageLog.send_message("Your inventory is empty.", GameColors.INVALID)
 		return false
 
 	_title.text = title_text

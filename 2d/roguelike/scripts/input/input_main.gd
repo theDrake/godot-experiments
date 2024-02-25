@@ -31,9 +31,11 @@ func get_action(player: Entity) -> Action:
 		return ActionDrop.new(player, await _get_item("Drop which item?",
 				player.inventory))
 	elif Input.is_action_just_pressed("look"):
-		await get_grid_position(player, 0)
+		await _get_grid_position(player, 0)
 	elif Input.is_action_just_pressed("view_history"):
 		SignalBus.toggle_view_history.emit()
+	elif Input.is_action_just_pressed("descend"):
+		return ActionDescend.new(player)
 	else:
 		for direction in DIRECTIONS:
 			if Input.is_action_just_pressed(direction):
@@ -49,13 +51,17 @@ func use_item(player: Entity) -> Action:
 	if not item:
 		return null
 	elif item.usable and item.usable.ranged:
-		var target_position: Vector2i = await get_grid_position(player,
+		var target_position: Vector2i = await _get_grid_position(player,
 				item.usable.radius, true)
 		if target_position.x > -1:
 			return ActionUse.new(player, item, target_position)
 		return null
 
 	return ActionUse.new(player, item)
+
+
+static func random_direction() -> Vector2i:
+	return DIRECTIONS[DIRECTIONS.keys().pick_random()]
 
 
 func _get_item(window_title: String, inventory: ComponentInventory,
@@ -74,7 +80,7 @@ func _get_item(window_title: String, inventory: ComponentInventory,
 	return selected_item
 
 
-func get_grid_position(player: Entity, radius: int,
+func _get_grid_position(player: Entity, radius: int,
 		already_paused: bool = false) -> Vector2i:
 	if not already_paused:
 		SignalBus.toggle_pause.emit()
@@ -83,7 +89,3 @@ func get_grid_position(player: Entity, radius: int,
 	SignalBus.toggle_pause.emit()
 
 	return pos
-
-
-static func random_direction() -> Vector2i:
-	return DIRECTIONS[DIRECTIONS.keys().pick_random()]

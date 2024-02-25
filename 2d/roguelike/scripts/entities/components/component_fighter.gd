@@ -3,6 +3,13 @@ extends Component
 
 
 signal hp_changed(hp, max_hp)
+signal xp_changed(xp, max_xp)
+signal level_up_required
+signal leveled_up
+
+const DEFAULT_MAX_HP_BOOST: int = 5
+const DEFAULT_POWER_BOOST: int = 1
+const DEFAULT_DEFENSE_BOOST: int = 1
 
 var max_hp: int
 var hp: int:
@@ -19,15 +26,35 @@ var defense: int
 var power: int
 var death_texture: Texture
 #var death_color: Color
+var xp: int:
+	set(value):
+		var diff: int = value - xp
+		xp = value
+		xp_changed.emit(xp, xp_for_next_level())
+		if diff <= 0 or level_up_base == 0:
+			return
+		MessageLog.send_message("%d experience earned." % diff,
+				GameColors.XP_EARNED)
+		if xp >= xp_for_next_level():
+			MessageLog.send_message("You advance to level %d!" % (level + 1),
+					GameColors.LEVEL_UP)
+			level_up_required.emit()
+var level: int
+var level_up_base: int
+var level_up_factor: int
 
 
-func _init(definition: ComponentFighterDefinition) -> void:
-	max_hp = definition.max_hp
-	hp = definition.max_hp
-	defense = definition.defense
-	power = definition.power
-	death_texture = definition.death_texture
-	#death_color = definition.death_color
+func _init(def: ComponentFighterDefinition) -> void:
+	max_hp = def.max_hp
+	hp = def.max_hp
+	defense = def.defense
+	power = def.power
+	death_texture = def.death_texture
+	#death_color = def.death_color
+	xp = def.xp
+	level = def.level
+	level_up_base = def.level_up_base
+	level_up_factor = def.level_up_factor
 
 
 func heal(amount: int) -> int:
@@ -50,6 +77,8 @@ func die(silently: bool = false) -> void:
 			death_message = "%s is dead!" % entity.entity_name
 			death_message_color = GameColors.ENEMY_DEATH
 		MessageLog.send_message(death_message, death_message_color)
+		if not entity.is_player:
+			get_map_data().get_player().fighter.xp += xp
 
 	entity.texture = death_texture
 	#entity.modulate = death_color
@@ -61,12 +90,44 @@ func die(silently: bool = false) -> void:
 	entity.type = Entity.EntityType.CORPSE
 
 
+func level_up() -> void:
+	xp -= xp_for_next_level()
+	level += 1
+
+
+func xp_for_next_level() -> int:
+	return level_up_base + level * level_up_factor
+
+
+func increase_max_hp(amount: int = DEFAULT_MAX_HP_BOOST) -> void:
+	max_hp += amount
+	hp += amount
+	MessageLog.send_message("Health increased!", GameColors.STATUS_EFFECT)
+	level_up()
+
+
+func increase_power(amount: int = DEFAULT_POWER_BOOST) -> void:
+	power += amount
+	MessageLog.send_message("Power increased!", GameColors.STATUS_EFFECT)
+	level_up()
+
+
+func increase_defense(amount: int = DEFAULT_DEFENSE_BOOST) -> void:
+	defense += amount
+	MessageLog.send_message("Defense increased!", GameColors.STATUS_EFFECT)
+	level_up()
+
+
 func get_save_data() -> Dictionary:
 	return {
 		"max_hp": max_hp,
 		"hp": hp,
 		"defense": defense,
 		"power": power,
+		"xp": xp,
+		"level": level,
+		"level_up_base": level_up_base,
+		"level_up_factor": level_up_factor,
 	}
 
 
@@ -75,3 +136,7 @@ func restore(save_data: Dictionary) -> void:
 	hp = save_data["hp"]
 	defense = save_data["defense"]
 	power = save_data["power"]
+	xp = save_data["xp"]
+	level = save_data["level"]
+	level_up_base = save_data["level_up_base"]
+	level_up_factor = save_data["level_up_factor"]

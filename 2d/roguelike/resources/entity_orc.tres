@@ -10,6 +10,10 @@ script = ExtResource("1_duoyo")
 max_hp = 10
 power = 3
 defense = 1
+xp = 35
+level = 1
+level_up_base = 0
+level_up_factor = 150
 death_texture = ExtResource("1_qwkyn")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0t3b"]

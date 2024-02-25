@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d4m3kypc00a78"]
+[gd_scene load_steps=13 format=3 uid="uid://d4m3kypc00a78"]
 
 [ext_resource type="Texture2D" uid="uid://dwv44y2qjl2nq" path="res://art/menu_background.png" id="1_grjg0"]
 [ext_resource type="Script" path="res://scripts/gui/main_menu.gd" id="1_jmcto"]
@@ -25,27 +25,6 @@ border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsug7"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_0eklu"]
-device = -1
-keycode = 78
-unicode = 110
-
-[sub_resource type="Shortcut" id="Shortcut_bgq3q"]
-events = [SubResource("InputEventKey_0eklu")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_oksyu"]
-device = -1
-keycode = 76
-unicode = 108
-
-[sub_resource type="Shortcut" id="Shortcut_uriox"]
-events = [SubResource("InputEventKey_oksyu")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_drava"]
-device = -1
-keycode = 81
-unicode = 113
-
 [sub_resource type="InputEventKey" id="InputEventKey_r042r"]
 device = -1
 ctrl_pressed = true
@@ -57,7 +36,7 @@ device = -1
 keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_qcg0b"]
-events = [SubResource("InputEventKey_drava"), SubResource("InputEventKey_r042r"), SubResource("InputEventKey_k5jdj")]
+events = [SubResource("InputEventKey_r042r"), SubResource("InputEventKey_k5jdj")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_smb82"]
 font = ExtResource("2_f1hxg")
@@ -117,9 +96,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_k4yys")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_g74l1")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_rsug7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_g74l1")
-shortcut = SubResource("Shortcut_bgq3q")
 shortcut_feedback = false
-text = "[N]ew Game"
+text = "New Game"
 
 [node name="LoadButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -133,9 +111,8 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_k4yys")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_g74l1")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_rsug7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_g74l1")
-shortcut = SubResource("Shortcut_uriox")
 shortcut_feedback = false
-text = "[L]oad Game"
+text = "Load Game"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -150,7 +127,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_rsug7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_g74l1")
 shortcut = SubResource("Shortcut_qcg0b")
 shortcut_feedback = false
-text = "[Q]uit"
+text = "Quit"
 
 [node name="DeveloperLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2

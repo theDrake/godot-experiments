@@ -15,6 +15,6 @@ func use(action: ActionUse) -> bool:
 		consume(action.entity)
 		return true
 
-	MessageLog.send_message("Your health is already full.",
-			GameColors.IMPOSSIBLE)
+	MessageLog.send_message("Your health is already full.", GameColors.INVALID)
+
 	return false

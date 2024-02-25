@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://46anou4qqat5"]
+[gd_scene load_steps=28 format=3 uid="uid://46anou4qqat5"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4v3re"]
 [ext_resource type="Script" path="res://scripts/game_root.gd" id="1_lwahg"]
@@ -16,6 +16,9 @@
 [ext_resource type="Script" path="res://scripts/gui/hp_display.gd" id="9_pd2q4"]
 [ext_resource type="PackedScene" uid="uid://d4fdkvplljuoe" path="res://scenes/reticle.tscn" id="10_4wg7e"]
 [ext_resource type="Script" path="res://scripts/gui/message_log.gd" id="11_y6sul"]
+[ext_resource type="Script" path="res://scripts/gui/depth_label.gd" id="16_va745"]
+[ext_resource type="Script" path="res://scripts/gui/xp_display.gd" id="16_x3hiy"]
+[ext_resource type="Script" path="res://scripts/gui/character_info_box.gd" id="17_6glyf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45wf8"]
 atlas = ExtResource("8_d1sjd")
@@ -32,7 +35,7 @@ texture_margin_top = 5.0
 texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4j32"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnlic"]
 bg_color = Color(0.498039, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_463xw"]
@@ -43,6 +46,12 @@ font = ExtResource("9_3tn2l")
 font_size = 32
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ye62n"]
+bg_color = Color(0, 0, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_is45g"]
+bg_color = Color(0, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_mcf8r"]
 font = ExtResource("9_3tn2l")
@@ -75,7 +84,7 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(1152, 536)
+size = Vector2i(1152, 492)
 render_target_update_mode = 4
 
 [node name="Game" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport"]
@@ -118,7 +127,8 @@ script = ExtResource("5_04jm3")
 [node name="MouseWatcher" type="Node2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game/Map"]
 script = ExtResource("9_26tqm")
 
-[node name="Camera2D" type="Camera2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game"]
+[node name="PlayerCamera" type="Camera2D" parent="VBoxContainer/SubViewportContainer/SubViewport/Game"]
+unique_name_in_owner = true
 zoom = Vector2(2, 2)
 
 [node name="InfoBar" type="HBoxContainer" parent="VBoxContainer"]
@@ -141,7 +151,7 @@ script = ExtResource("9_pd2q4")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_e4j32")
+theme_override_styles/background = SubResource("StyleBoxFlat_wnlic")
 theme_override_styles/fill = SubResource("StyleBoxFlat_463xw")
 step = 1.0
 show_percentage = false
@@ -153,10 +163,63 @@ label_settings = SubResource("LabelSettings_5tooe")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="XPDisplay" type="MarginContainer" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("16_x3hiy")
+
+[node name="XPBar" type="ProgressBar" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/XPDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_ye62n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_is45g")
+step = 1.0
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/XPDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_5tooe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterInfoBox" type="HBoxContainer" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("17_6glyf")
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_mcf8r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttackLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_mcf8r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefenseLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_mcf8r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DepthLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_mcf8r")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_va745")
+
 [node name="MouseoverLabel" type="Label" parent="VBoxContainer/InfoBar/StatsPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 label_settings = SubResource("LabelSettings_mcf8r")
+text_overrun_behavior = 3
 
 [node name="MessagePanel" type="PanelContainer" parent="VBoxContainer/InfoBar"]
 layout_mode = 2
@@ -176,4 +239,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [connection signal="player_created" from="VBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/HPDisplay" method="_on_player_created"]
+[connection signal="player_created" from="VBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/XPDisplay" method="_on_player_created"]
+[connection signal="player_created" from="VBoxContainer/SubViewportContainer/SubViewport/Game" to="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/CharacterInfoBox" method="_on_player_created"]
+[connection signal="environment_loaded" from="VBoxContainer/SubViewportContainer/SubViewport/Game/Map" to="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/DepthLabel" method="set_depth_text"]
 [connection signal="entities_found" from="VBoxContainer/SubViewportContainer/SubViewport/Game/Map/MouseWatcher" to="VBoxContainer/InfoBar/StatsPanel/VBoxContainer/MouseoverLabel" method="set_text"]
