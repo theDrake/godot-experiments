@@ -12,7 +12,7 @@ func perform() -> bool:
 
 	var target_grid_position: Vector2i = target.grid_position
 	var offset: Vector2i = target_grid_position - entity.grid_position
-	var distance: int = max(abs(offset.x), abs(offset.y))
+	var distance: int = maxi(abs(offset.x), abs(offset.y))
 
 	if get_map_data().get_tile(entity.grid_position).in_view:
 		if distance <= 1:

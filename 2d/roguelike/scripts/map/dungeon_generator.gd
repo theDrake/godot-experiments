@@ -2,15 +2,18 @@ class_name DungeonGenerator
 extends Node
 
 
-const ENEMIES = [
+const DEFAULT_MAX_ENEMIES_PER_ROOM: int = 2
+const DEFAULT_MAX_ITEMS_PER_ROOM: int = 1
+const FLOORS_PER_DIFFICULTY_INCREASE: int = 2
+const ENEMIES: Array[String] = [
 	"Orc",
 	"Troll",
 ]
-const ITEMS = [
+const ITEMS: Array[String] = [
 	"Potion of Healing",
+	"Scroll of Confusion",
 	"Scroll of Lightning",
 	"Scroll of Fireball",
-	"Scroll of Confusion",
 ]
 
 @export_category("Map")
@@ -21,10 +24,6 @@ const ITEMS = [
 @export var max_rooms: int = 10
 @export var room_max_size: int = 10
 @export var room_min_size: int = 6
-
-@export_category("Entities")
-@export var max_monsters_per_room: int = 2
-@export var max_items_per_room: int = 4
 
 var _rng := RandomNumberGenerator.new()
 
@@ -58,11 +57,16 @@ func generate_dungeon(player: Entity, depth: int) -> MapData:
 		else:
 			_tunnel_between(dungeon, rooms.back().get_center(),
 					new_room.get_center())
-		_place_entities(dungeon, new_room)
+		_place_n_random_entities_from_array(DEFAULT_MAX_ITEMS_PER_ROOM, ITEMS,
+				dungeon, new_room)
+		_place_n_random_entities_from_array(DEFAULT_MAX_ENEMIES_PER_ROOM,
+				ENEMIES, dungeon, new_room)
 		rooms.append(new_room)
 	for i in range(1, rooms.size()):
 		if _add_stairs_down(dungeon, rooms[-i]):
 			break
+	dungeon.get_tile(player.grid_position).set_tile_type(
+			Tile.TileType.STAIRS_UP)
 	dungeon.init_pathfinder()
 
 	return dungeon
@@ -81,17 +85,14 @@ func _add_stairs_down(dungeon: MapData, room: Rect2i) -> bool:
 	return false
 
 
-func _place_entities(dungeon: MapData, room: Rect2i) -> void:
-	for _i in _rng.randi_range(0, max_monsters_per_room):
+func _place_n_random_entities_from_array(n: int, array: Array[String],
+		dungeon: MapData, room: Rect2i) -> void:
+	var difficulty: int = dungeon.current_depth / FLOORS_PER_DIFFICULTY_INCREASE
+	for _i in n + difficulty:
 		var spawn_point := _get_entity_spawn_point(dungeon, room)
 		if spawn_point.x > -1:
 			dungeon.entities.append(Entity.new(dungeon, spawn_point,
-					ENEMIES.pick_random()))
-	for _i in _rng.randi_range(0, max_items_per_room):
-		var spawn_point := _get_entity_spawn_point(dungeon, room)
-		if spawn_point.x > -1:
-			dungeon.entities.append(Entity.new(dungeon, spawn_point,
-					ITEMS.pick_random()))
+					array[_get_weighted_index(array.size(), difficulty)]))
 
 
 func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:
@@ -103,6 +104,18 @@ func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:
 			return Vector2i(-1, -1)
 
 	return spawn_point
+
+
+func _get_weighted_index(array_size: int, difficulty: int) -> int:
+	var random_float: float = randf()
+	var comparison_float: float = 0
+	for i in array_size:
+		comparison_float += 2.0 * ((1.0 - comparison_float) /
+				(1.0 + array_size - i))
+		if random_float < comparison_float - (0.1 * difficulty):
+			return i
+
+	return array_size - 1
 
 
 func _carve_tile(dungeon: MapData, x: int, y: int) -> void:

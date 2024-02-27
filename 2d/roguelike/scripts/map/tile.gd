@@ -4,12 +4,14 @@ extends Sprite2D
 
 enum TileType {
 	FLOOR,
+	STAIRS_UP,
 	STAIRS_DOWN,
 	WALL,
 }
 
 const TILES = [
 	preload("res://resources/tile_floor.tres"),
+	preload("res://resources/tile_stairs_up.tres"),
 	preload("res://resources/tile_stairs_down.tres"),
 	preload("res://resources/tile_wall.tres"),
 ]

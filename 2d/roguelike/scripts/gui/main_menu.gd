@@ -9,8 +9,11 @@ signal game_requested(load)
 
 
 func _ready() -> void:
-	_new_button.grab_focus()
-	_load_button.disabled = not FileAccess.file_exists(Game.SAVE_FILE)
+	if FileAccess.file_exists(Game.SAVE_FILE):
+		_load_button.grab_focus()
+	else:
+		_load_button.disabled = true
+		_new_button.grab_focus()
 
 
 func _on_new_button_pressed() -> void:

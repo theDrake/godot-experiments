@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TileDefinition" load_steps=4 format=3 uid="uid://c3jvj5m8f42mr"]
+
+[ext_resource type="Script" path="res://scripts/map/tile_definition.gd" id="1_wpfa2"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="2_4pefc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08y2m"]
+atlas = ExtResource("2_4pefc")
+region = Rect2(32, 96, 16, 16)
+
+[resource]
+script = ExtResource("1_wpfa2")
+texture = SubResource("AtlasTexture_08y2m")
+color_lit = Color(1, 1, 1, 1)
+color_dark = Color(0.411765, 0.411765, 0.411765, 1)
+blocks_movement = false
+blocks_sight = false

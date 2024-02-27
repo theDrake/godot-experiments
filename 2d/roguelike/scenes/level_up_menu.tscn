@@ -74,7 +74,7 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "LEVEL UP"
+text = "Level up!"
 label_settings = SubResource("LabelSettings_vg3y6")
 horizontal_alignment = 1
 vertical_alignment = 1

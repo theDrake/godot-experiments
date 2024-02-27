@@ -22,14 +22,18 @@ func get_names_at(grid_position: Vector2i) -> String:
 	var entity_names := ""
 	var tile: Tile = map.data.get_tile(grid_position)
 	if tile and tile.in_view:
+		if tile.type == Tile.TileType.STAIRS_UP:
+			entity_names += "Stairs Up"
+		elif tile.type == Tile.TileType.STAIRS_DOWN:
+			entity_names += "Stairs Down"
 		var entity_array: Array[Entity] = []
 		for entity in map.data.entities:
 			if entity.grid_position == grid_position:
 				entity_array.append(entity)
 		entity_array.sort_custom(func(a, b): return a.z_index > b.z_index)
-		if not entity_array.is_empty():
-			entity_names = entity_array[0].entity_name
-			for i in range(1, entity_array.size()):
-				entity_names += ", %s" % entity_array[i].entity_name
+		for i in range(0, entity_array.size()):
+			if entity_names.length() > 0:
+				entity_names += ", "
+			entity_names += "%s" % entity_array[i].entity_name
 
 	return entity_names

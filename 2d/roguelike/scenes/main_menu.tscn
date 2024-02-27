@@ -112,7 +112,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_g74l1")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_rsug7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_g74l1")
 shortcut_feedback = false
-text = "Load Game"
+text = "Continue"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2

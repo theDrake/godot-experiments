@@ -1,6 +1,6 @@
 # Roguelike
 
-A simple 2D fantasy [roguelike](https://en.wikipedia.org/wiki/Roguelike), built using [Godot 4.2](https://godotengine.org/download/) and initially based on a [tutorial](https://github.com/SelinaDev/Godot-Roguelike-Tutorial). Art assets courtesy of [Kenney's 1-Bit Pack](https://kenney.nl/assets/1-bit-pack) ([CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)).
+A simple 2D fantasy [roguelike](https://en.wikipedia.org/wiki/Roguelike). Initially based on a [tutorial](https://github.com/SelinaDev/Godot-Roguelike-Tutorial), but significantly modified and expanded using [Godot 4.2](https://godotengine.org/download/). Art assets courtesy of [Kenney's 1-Bit Pack](https://kenney.nl/assets/1-bit-pack) ([CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)).
 
 ![Screenshot](roguelike.png)
 

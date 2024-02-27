@@ -2,7 +2,7 @@ class_name ComponentLightning
 extends ComponentUsable
 
 
-var _max_range: int
+var _max_range: float
 
 
 func _init(def: ComponentLightningDefinition) -> void:

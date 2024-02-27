@@ -60,8 +60,10 @@ func _init(def: ComponentFighterDefinition) -> void:
 func heal(amount: int) -> int:
 	if hp == max_hp or amount < 0:
 		return 0
-	amount = max(amount, amount + hp - max_hp)
+
+	amount = mini(amount, max_hp - hp)
 	hp += amount
+
 	return amount
 
 
@@ -80,7 +82,13 @@ func die(silently: bool = false) -> void:
 		if not entity.is_player:
 			get_map_data().get_player().fighter.xp += xp
 
-	entity.texture = death_texture
+	var tile_type: Tile.TileType = get_map_data().get_tile(
+			entity.grid_position).type
+	if not entity.is_player and (tile_type == Tile.TileType.STAIRS_UP or
+			tile_type == Tile.TileType.STAIRS_DOWN):
+		entity.texture = null
+	else:
+		entity.texture = death_texture
 	#entity.modulate = death_color
 	entity.mover.queue_free()
 	entity.mover = null
@@ -93,6 +101,7 @@ func die(silently: bool = false) -> void:
 func level_up() -> void:
 	xp -= xp_for_next_level()
 	level += 1
+	leveled_up.emit()
 
 
 func xp_for_next_level() -> int:

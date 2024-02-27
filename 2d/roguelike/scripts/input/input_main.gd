@@ -34,6 +34,8 @@ func get_action(player: Entity) -> Action:
 		await _get_grid_position(player, 0)
 	elif Input.is_action_just_pressed("view_history"):
 		SignalBus.toggle_view_history.emit()
+	elif Input.is_action_just_pressed("ascend"):
+		return ActionAscend.new(player)
 	elif Input.is_action_just_pressed("descend"):
 		return ActionDescend.new(player)
 	else:

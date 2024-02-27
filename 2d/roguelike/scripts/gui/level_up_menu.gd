@@ -12,11 +12,11 @@ var _player: Entity
 
 func init_buttons(player: Entity) -> void:
 	_player = player
-	_health_upgrade_button.text = " (1) Constitution (+%d max. HP)" % \
+	_health_upgrade_button.text = "(1) Constitution (+%d max. HP)" % \
 			ComponentFighter.DEFAULT_MAX_HP_BOOST
-	_power_upgrade_button.text = " (2) Strength (+%d attack)" % \
+	_power_upgrade_button.text = "(2) Strength (+%d attack)" % \
 			ComponentFighter.DEFAULT_POWER_BOOST
-	_defense_upgrade_button.text = " (3) Agility (+%d defense)" % \
+	_defense_upgrade_button.text = "(3) Agility (+%d defense)" % \
 			ComponentFighter.DEFAULT_DEFENSE_BOOST
 	_health_upgrade_button.grab_focus()
 
