@@ -11,11 +11,11 @@ func _init(e: Entity, dx: int, dy: int) -> void:
 
 
 func get_target_actor() -> Entity:
-	return get_map_data().get_actor_at(get_destination())
+	return entity.map_data.get_actor_at(get_destination())
 
 
 func get_blocker_at_destination() -> Entity:
-	return get_map_data().get_blocker_at(get_destination())
+	return entity.map_data.get_blocker_at(get_destination())
 
 
 func get_destination() -> Vector2i:

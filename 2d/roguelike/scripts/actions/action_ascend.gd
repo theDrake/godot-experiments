@@ -3,7 +3,7 @@ extends Action
 
 
 func perform() -> bool:
-	if get_map_data().get_tile(entity.grid_position).type == \
+	if entity.map_data.get_tile(entity.grid_position).type == \
 			Tile.TileType.STAIRS_UP:
 		#SignalBus.player_ascended.emit()
 		MessageLog.send_message("Not implemented yet.", GameColors.TRAVEL)

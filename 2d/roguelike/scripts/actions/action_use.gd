@@ -16,8 +16,14 @@ func _init(user: Entity, item: Entity, target = null) -> void:
 
 
 func perform() -> bool:
-	return _item and _item.usable.use(self)
+	if _item:
+		if _item.usable:
+			return _item.usable.use(self)
+		elif _item.equipment:
+			return entity.fighter.equip(_item, true)
+
+	return false
 
 
 func get_target_actor() -> Entity:
-	return get_map_data().get_actor_at(target_position)
+	return entity.map_data.get_actor_at(target_position)

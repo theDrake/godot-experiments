@@ -12,6 +12,7 @@ const STATUS_EFFECT := Color.VIOLET
 const XP_EARNED := Color.SKY_BLUE
 const LEVEL_UP := Color.GOLD
 const TRAVEL := Color.DEEP_SKY_BLUE
+const EQUIPMENT := Color.STEEL_BLUE
 const INVALID := Color.SLATE_GRAY
 const IMPOSSIBLE := Color.DIM_GRAY
 const ERROR := Color.DARK_RED

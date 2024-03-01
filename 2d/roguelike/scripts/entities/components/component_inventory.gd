@@ -16,12 +16,11 @@ func drop(item: Entity) -> bool:
 		return false
 
 	items.erase(item)
-	var map_data: MapData = get_map_data()
-	map_data.entities.append(item)
-	map_data.entity_placed.emit(item)
-	item.map_data = map_data
+	entity.map_data.entities.append(item)
+	entity.map_data.entity_placed.emit(item)
+	item.map_data = entity.map_data
 	item.grid_position = entity.grid_position
-	MessageLog.send_message("You dropped a %s." % item.entity_name,
+	MessageLog.send_message("You drop %s." % item.entity_name,
 			GameColors.DEFAULT)
 
 	return true

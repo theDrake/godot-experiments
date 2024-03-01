@@ -44,6 +44,8 @@ func _register_item(index: int, item: Entity) -> void:
 	var item_button: Button = INVENTORY_BUTTON.instantiate()
 	item_button.text = "( %s ) %s" % [String.chr("a".unicode_at(0) + index),
 			item.entity_name]
+	if item.equipment and item.equipment.equipped:
+		item_button.text += "*"
 	var shortcut_event := InputEventKey.new()
 	shortcut_event.keycode = KEY_A + index
 	item_button.shortcut = Shortcut.new()

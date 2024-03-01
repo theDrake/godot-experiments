@@ -10,10 +10,10 @@ enum TileType {
 }
 
 const TILES = [
-	preload("res://resources/tile_floor.tres"),
-	preload("res://resources/tile_stairs_up.tres"),
-	preload("res://resources/tile_stairs_down.tres"),
-	preload("res://resources/tile_wall.tres"),
+	preload("res://resources/tiles/floor.tres"),
+	preload("res://resources/tiles/stairs_up.tres"),
+	preload("res://resources/tiles/stairs_down.tres"),
+	preload("res://resources/tiles/wall.tres"),
 ]
 
 var in_view: bool = false:

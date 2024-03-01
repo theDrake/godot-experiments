@@ -3,7 +3,7 @@ extends Action
 
 
 func perform() -> bool:
-	if get_map_data().get_tile(entity.grid_position).type == \
+	if entity.map_data.get_tile(entity.grid_position).type == \
 			Tile.TileType.STAIRS_DOWN:
 		SignalBus.player_descended.emit()
 		MessageLog.send_message("You descend the staircase.", GameColors.TRAVEL)

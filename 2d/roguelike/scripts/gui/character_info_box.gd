@@ -12,6 +12,7 @@ var _player: Entity
 func _on_player_created(player: Entity) -> void:
 	_player = player
 	_player.fighter.leveled_up.connect(_on_player_stats_changed)
+	_player.fighter.equipment_changed.connect(_on_player_stats_changed)
 	_on_player_stats_changed()
 
 

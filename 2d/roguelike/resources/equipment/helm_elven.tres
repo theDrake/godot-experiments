@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://j8hkc0r1rryh"]
+
+[ext_resource type="Script" path="res://scripts/entities/components/component_equipment_definition.gd" id="1_2yqvg"]
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="2_u4xkp"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="3_r54gd"]
+
+[sub_resource type="Resource" id="Resource_s32yl"]
+script = ExtResource("1_2yqvg")
+type = 2
+power_bonus = 0
+defense_bonus = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulphl"]
+atlas = ExtResource("3_r54gd")
+region = Rect2(560, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_u4xkp")
+name = "Elven Helm"
+texture = SubResource("AtlasTexture_ulphl")
+color = Color(1, 1, 1, 1)
+type = 1
+blocks_movement = false
+inventory_capacity = 0
+behavior = 0
+item_def = SubResource("Resource_s32yl")

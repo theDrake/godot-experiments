@@ -12,7 +12,7 @@ const DIRECTIONS = {
 	"move_down_left": Vector2i.DOWN + Vector2i.LEFT,
 	"move_down_right": Vector2i.DOWN + Vector2i.RIGHT,
 }
-const INVENTORY = preload("res://scenes/inventory.tscn")
+const INVENTORY_MENU = preload("res://scenes/inventory_menu.tscn")
 
 @export var reticle: Reticle
 
@@ -68,14 +68,14 @@ static func random_direction() -> Vector2i:
 
 func _get_item(window_title: String, inventory: ComponentInventory,
 		stay_paused: bool = false) -> Entity:
-	var menu: InventoryMenu = INVENTORY.instantiate()
+	var menu: InventoryMenu = INVENTORY_MENU.instantiate()
 	add_child(menu)
 	if not menu.build_list(window_title, inventory):
 		return null
 	SignalBus.toggle_pause.emit()
 	var selected_item: Entity = await menu.item_selected
-	if not stay_paused or not selected_item or (selected_item.usable and not
-			selected_item.usable.ranged):
+	if not stay_paused or not selected_item or selected_item.equipment or (
+			selected_item.usable and not selected_item.usable.ranged):
 		await get_tree().physics_frame
 		SignalBus.toggle_pause.emit()
 

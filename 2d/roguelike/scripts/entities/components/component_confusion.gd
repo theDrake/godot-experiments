@@ -20,8 +20,8 @@ func use(action: ActionUse) -> bool:
 		MessageLog.send_message("You cannot confuse yourself!",
 				GameColors.INVALID)
 		return false
-	MessageLog.send_message("%s is confused." % target.entity_name,
-			GameColors.STATUS_EFFECT)
+	MessageLog.send_message("%s begins to stumble around..." %
+			target.entity_name, GameColors.STATUS_EFFECT)
 	target.add_child(ComponentMoverConfused.new(power))
 	consume(user)
 

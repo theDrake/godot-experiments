@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://cujhq2ur1amy3"]
+
+[ext_resource type="Script" path="res://scripts/entities/components/component_equipment_definition.gd" id="1_2metg"]
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="2_81nom"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="3_6505w"]
+
+[sub_resource type="Resource" id="Resource_s32yl"]
+script = ExtResource("1_2metg")
+type = 5
+power_bonus = 0
+defense_bonus = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulphl"]
+atlas = ExtResource("3_6505w")
+region = Rect2(656, 0, 16, 16)
+
+[resource]
+script = ExtResource("2_81nom")
+name = "Steel Gauntlets"
+texture = SubResource("AtlasTexture_ulphl")
+color = Color(1, 1, 1, 1)
+type = 1
+blocks_movement = false
+inventory_capacity = 0
+behavior = 0
+item_def = SubResource("Resource_s32yl")

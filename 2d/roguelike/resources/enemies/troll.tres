@@ -27,6 +27,6 @@ texture = SubResource("AtlasTexture_p6noa")
 color = Color(1, 1, 1, 1)
 type = 2
 blocks_movement = true
-inventory_capacity = 0
+inventory_capacity = 5
 fighter_def = SubResource("Resource_c47ef")
 behavior = 2

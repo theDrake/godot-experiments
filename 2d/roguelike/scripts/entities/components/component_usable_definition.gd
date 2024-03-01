@@ -1,5 +1,5 @@
 class_name ComponentUsableDefinition
-extends Resource
+extends ComponentItemDefinition
 
 
 @export var power: int

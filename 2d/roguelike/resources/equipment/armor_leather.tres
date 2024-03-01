@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=6 format=3 uid="uid://de6k68dq7kvib"]
+
+[ext_resource type="Script" path="res://scripts/entities/components/component_equipment_definition.gd" id="1_jeqej"]
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="2_b0tpb"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="3_i1n5f"]
+
+[sub_resource type="Resource" id="Resource_s32yl"]
+script = ExtResource("1_jeqej")
+type = 4
+power_bonus = 0
+defense_bonus = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulphl"]
+atlas = ExtResource("3_i1n5f")
+region = Rect2(592, 16, 16, 16)
+
+[resource]
+script = ExtResource("2_b0tpb")
+name = "Leather Armor"
+texture = SubResource("AtlasTexture_ulphl")
+color = Color(1, 1, 1, 1)
+type = 1
+blocks_movement = false
+inventory_capacity = 0
+behavior = 0
+item_def = SubResource("Resource_s32yl")

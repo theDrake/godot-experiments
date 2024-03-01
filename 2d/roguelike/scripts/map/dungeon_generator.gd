@@ -9,11 +9,54 @@ const ENEMIES: Array[String] = [
 	"Orc",
 	"Troll",
 ]
-const ITEMS: Array[String] = [
-	"Potion of Healing",
-	"Scroll of Confusion",
-	"Scroll of Lightning",
-	"Scroll of Fireball",
+const ITEMS: Array[Array] = [
+	[ # Armor
+		"Cloak",
+		"Leather Boots",
+		"Leather Gloves",
+		"Wooden Shield",
+		"Leather Armor",
+		"Iron Boots",
+		"Iron Gauntlets",
+		"Iron Shield",
+		"Iron Helm",
+		"Iron Armor",
+		"Steel Boots",
+		"Steel Gauntlets",
+		"Steel Shield",
+		"Steel Helm",
+		"Steel Armor",
+		"Elven Boots",
+		"Elven Gauntlets",
+		"Elven Shield",
+		"Elven Helm",
+		"Elven Armor",
+		"Dwarven Boots",
+		"Dwarven Gauntlets",
+		"Dwarven Shield",
+		"Dwarven Helm",
+		"Dwarven Armor",
+	],
+	[ # Weapons
+		"Iron Dagger",
+		"Iron Sword",
+		"Iron Axe",
+		"Steel Dagger",
+		"Steel Sword",
+		"Steel Axe",
+		"Elven Dagger",
+		"Elven Sword",
+		"Elven Axe",
+		"Dwarven Dagger",
+		"Dwarven Sword",
+		"Dwarven Axe",
+	],
+	[ # Usables
+		"Potion of Healing",
+		"Scroll of Confusion",
+		"Scroll of Lightning",
+		"Scroll of Fireball",
+	],
 ]
 
 @export_category("Map")
@@ -85,14 +128,19 @@ func _add_stairs_down(dungeon: MapData, room: Rect2i) -> bool:
 	return false
 
 
-func _place_n_random_entities_from_array(n: int, array: Array[String],
-		dungeon: MapData, room: Rect2i) -> void:
+func _place_n_random_entities_from_array(n: int, array: Array, dungeon: MapData,
+		room: Rect2i) -> void:
 	var difficulty: int = dungeon.current_depth / FLOORS_PER_DIFFICULTY_INCREASE
 	for _i in n + difficulty:
 		var spawn_point := _get_entity_spawn_point(dungeon, room)
 		if spawn_point.x > -1:
-			dungeon.entities.append(Entity.new(dungeon, spawn_point,
-					array[_get_weighted_index(array.size(), difficulty)]))
+			if array is Array[Array]:
+				var j: int = randi() % array.size()
+				dungeon.entities.append(Entity.new(dungeon, spawn_point,
+					array[j][_get_weighted_index(array[j].size(), difficulty)]))
+			else:
+				dungeon.entities.append(Entity.new(dungeon, spawn_point,
+						array[_get_weighted_index(array.size(), difficulty)]))
 
 
 func _get_entity_spawn_point(dungeon: MapData, room: Rect2i) -> Vector2i:
@@ -112,7 +160,7 @@ func _get_weighted_index(array_size: int, difficulty: int) -> int:
 	for i in array_size:
 		comparison_float += 2.0 * ((1.0 - comparison_float) /
 				(1.0 + array_size - i))
-		if random_float < comparison_float - (0.1 * difficulty):
+		if random_float + (0.1 * difficulty) < comparison_float:
 			return i
 
 	return array_size - 1

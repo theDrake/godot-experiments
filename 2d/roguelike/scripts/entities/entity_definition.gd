@@ -15,4 +15,4 @@ extends Resource
 @export_category("Components")
 @export var fighter_def: ComponentFighterDefinition
 @export var behavior: Entity.Behavior
-@export var usable_def: ComponentUsableDefinition
+@export var item_def: ComponentItemDefinition

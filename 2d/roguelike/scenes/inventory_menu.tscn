@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://8cpl7n345duw"]
 
-[ext_resource type="Script" path="res://scripts/gui/inventory.gd" id="1_8wuwi"]
+[ext_resource type="Script" path="res://scripts/gui/inventory_menu.gd" id="1_8wuwi"]
 [ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="1_b5jed"]
 [ext_resource type="FontFile" uid="uid://echw0a2twfcv" path="res://fonts/Kenney Pixel.ttf" id="2_fabpv"]
 
