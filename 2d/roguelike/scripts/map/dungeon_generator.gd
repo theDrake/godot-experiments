@@ -2,12 +2,29 @@ class_name DungeonGenerator
 extends Node
 
 
-const DEFAULT_MAX_ENEMIES_PER_ROOM: int = 2
-const DEFAULT_MAX_ITEMS_PER_ROOM: int = 1
+const DEFAULT_MAX_ENEMIES_PER_ROOM: int = 1
+const DEFAULT_MAX_ITEMS_PER_ROOM: int = 2
 const FLOORS_PER_DIFFICULTY_INCREASE: int = 2
 const ENEMIES: Array[String] = [
+	"Bat",
+	"Snake",
+	"Beetle",
+	"Goblin",
+	"Spider",
 	"Orc",
+	"Scorpion",
+	"Skeleton",
+	"Slime",
+	"Hobgoblin",
 	"Troll",
+	"Ghost",
+	"Cyclops",
+	"Ghoul",
+	"Imp",
+	"Ogre",
+	"Djinn",
+	"Sorcerer",
+	"Demon",
 ]
 const ITEMS: Array[Array] = [
 	[ # Armor
@@ -108,8 +125,14 @@ func generate_dungeon(player: Entity, depth: int) -> MapData:
 	for i in range(1, rooms.size()):
 		if _add_stairs_down(dungeon, rooms[-i]):
 			break
+
+	# apply special tiles
+	for e in dungeon.entities:
+		if e.entity_name.contains("Spider"):
+			dungeon.get_tile(e.grid_position).set_tile_type(Tile.TileType.WEB)
 	dungeon.get_tile(player.grid_position).set_tile_type(
 			Tile.TileType.STAIRS_UP)
+
 	dungeon.init_pathfinder()
 
 	return dungeon

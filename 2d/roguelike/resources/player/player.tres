@@ -12,13 +12,13 @@ power = 6
 defense = 2
 xp = 0
 level = 1
-level_up_base = 200
-level_up_factor = 150
+level_up_base = 50
+level_up_factor = 50
 death_texture = ExtResource("1_n7isg")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hciw2"]
 atlas = ExtResource("2_805io")
-region = Rect2(448, 0, 16, 16)
+region = Rect2(400, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_e1lav")

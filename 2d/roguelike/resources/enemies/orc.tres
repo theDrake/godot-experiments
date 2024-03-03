@@ -7,10 +7,10 @@
 
 [sub_resource type="Resource" id="Resource_6kg4g"]
 script = ExtResource("2_qmstu")
-max_hp = 10
-power = 3
-defense = 1
-xp = 35
+max_hp = 15
+power = 4
+defense = 2
+xp = 15
 level = 1
 level_up_base = 0
 level_up_factor = 150
@@ -18,7 +18,7 @@ death_texture = ExtResource("1_wn5lh")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0t3b"]
 atlas = ExtResource("4_cx67h")
-region = Rect2(496, 0, 16, 16)
+region = Rect2(416, 32, 16, 16)
 
 [resource]
 script = ExtResource("3_tkbv6")

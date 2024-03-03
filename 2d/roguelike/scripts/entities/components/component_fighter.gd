@@ -11,6 +11,19 @@ signal leveled_up
 const DEFAULT_MAX_HP_BOOST: int = 5
 const DEFAULT_POWER_BOOST: int = 1
 const DEFAULT_DEFENSE_BOOST: int = 1
+const PLAYER_TEXTURES = {
+	"default": preload("res://resources/player/default_texture.tres"),
+	"onehanded": preload("res://resources/player/sword_shield_texture.tres"),
+	"dual-onehanded": preload(
+			"res://resources/player/sword_sword_texture.tres"),
+	"twohanded": preload("res://resources/player/spear_texture.tres"),
+	"cloaked": preload("res://resources/player/cloak_texture.tres"),
+	"cloaked-twohanded": preload(
+			"res://resources/player/cloak_staff_texture.tres"),
+	"helmeted": preload("res://resources/player/helm_texture.tres"),
+	"helmeted-onehanded": preload(
+			"res://resources/player/helm_sword_shield_texture.tres"),
+}
 
 var max_hp: int
 var hp: int:
@@ -47,6 +60,11 @@ func _init(def: ComponentFighterDefinition) -> void:
 	level_up_factor = def.level_up_factor
 	for type in ComponentEquipment.Type:
 		equipment_slots.append([])
+
+
+func _ready() -> void:
+	if entity.is_player:
+		equipment_changed.connect(update_texture)
 
 
 func heal(amount: int) -> int:
@@ -188,6 +206,34 @@ func increase_defense(amount: int = DEFAULT_DEFENSE_BOOST) -> void:
 	level_up()
 
 
+func update_texture() -> void:
+	if not entity or not entity.is_player:
+		return
+
+	if _dual_wielding():
+		entity.texture = PLAYER_TEXTURES["dual-onehanded"]
+	elif _get_equipment(ComponentEquipment.Type.BODY) and \
+			_get_equipment(ComponentEquipment.Type.BODY).entity_name.contains(
+			"Cloak"):
+		if _get_equipment(ComponentEquipment.Type.TWO_HANDED):
+			entity.texture = PLAYER_TEXTURES["cloaked-twohanded"]
+		else:
+			entity.texture = PLAYER_TEXTURES["cloaked"]
+	elif _get_equipment(ComponentEquipment.Type.TWO_HANDED):
+		entity.texture = PLAYER_TEXTURES["twohanded"]
+	elif _get_equipment(ComponentEquipment.Type.HEAD) and \
+			_get_equipment(ComponentEquipment.Type.HEAD).entity_name.contains(
+			"Helm"):
+		if _get_equipment(ComponentEquipment.Type.ONE_HANDED):
+			entity.texture = PLAYER_TEXTURES["helmeted-onehanded"]
+		else:
+			entity.texture = PLAYER_TEXTURES["helmeted"]
+	elif _get_equipment(ComponentEquipment.Type.ONE_HANDED):
+		entity.texture = PLAYER_TEXTURES["onehanded"]
+	else:
+		entity.texture = PLAYER_TEXTURES["default"]
+
+
 func get_save_data() -> Dictionary:
 	return {
 		"max_hp": max_hp,
@@ -213,6 +259,20 @@ func restore(save_data: Dictionary) -> void:
 	equipment_slots = []
 	for type in ComponentEquipment.Type:
 		equipment_slots.append([])
+
+
+func _get_equipment(type: ComponentEquipment.Type) -> Entity:
+	if equipment_slots[type].size() > 0:
+		return equipment_slots[type][0]
+
+	return null
+
+
+func _dual_wielding() -> bool:
+	var type := ComponentEquipment.Type.ONE_HANDED
+	return equipment_slots[type].size() > 1 and \
+			_is_weapon(equipment_slots[type][0]) and \
+			_is_weapon(equipment_slots[type][1])
 
 
 func _is_shield(item: Entity) -> bool:

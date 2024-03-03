@@ -48,6 +48,7 @@ func load_game() -> bool:
 	_player.add_child(_cam)
 	_player.fighter.level_up_required.connect(_on_level_up_requested)
 	map.populate(map.data.current_depth)
+	_player.fighter.update_texture()
 	player_created.emit(_player)
 	map.update_fov(_player.grid_position)
 	MessageLog.send_message.bind("Welcome back, adventurer!",

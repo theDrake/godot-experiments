@@ -7,6 +7,7 @@ enum TileType {
 	STAIRS_UP,
 	STAIRS_DOWN,
 	WALL,
+	WEB,
 }
 
 const TILES = [
@@ -14,6 +15,7 @@ const TILES = [
 	preload("res://resources/tiles/stairs_up.tres"),
 	preload("res://resources/tiles/stairs_down.tres"),
 	preload("res://resources/tiles/wall.tres"),
+	preload("res://resources/tiles/web.tres"),
 ]
 
 var in_view: bool = false:

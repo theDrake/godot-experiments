@@ -16,7 +16,7 @@ func perform() -> bool:
 	else:
 		attack_color = GameColors.ENEMY_ATTACK
 		attack_description = "%s attacks %s" % [entity.entity_name,
-				target.entity_name]
+				"you" if target.is_player else target.entity_name]
 	attack_description += " for %d damage." % damage
 	MessageLog.send_message(attack_description, attack_color)
 	target.fighter.hp -= damage

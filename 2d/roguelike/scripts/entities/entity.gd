@@ -6,8 +6,25 @@ enum EntityType {CORPSE, ITEM, ACTOR}
 enum Behavior {NONE, FRIENDLY, HOSTILE, SCARED, CONFUSED}
 
 const ENTITY_DEFINITIONS = {
-	"Player": "res://resources/player.tres",
+	"Player": "res://resources/player/player.tres",
+	"Bat": "res://resources/enemies/bat.tres",
+	"Beetle": "res://resources/enemies/beetle.tres",
+	"Cyclops": "res://resources/enemies/cyclops.tres",
+	"Demon": "res://resources/enemies/demon.tres",
+	"Djinn": "res://resources/enemies/djinn.tres",
+	"Ghost": "res://resources/enemies/ghost.tres",
+	"Ghoul": "res://resources/enemies/ghoul.tres",
+	"Goblin": "res://resources/enemies/goblin.tres",
+	"Hobgoblin": "res://resources/enemies/hobgoblin.tres",
+	"Imp": "res://resources/enemies/imp.tres",
+	"Ogre": "res://resources/enemies/ogre.tres",
 	"Orc": "res://resources/enemies/orc.tres",
+	"Scorpion": "res://resources/enemies/scorpion.tres",
+	"Skeleton": "res://resources/enemies/skeleton.tres",
+	"Slime": "res://resources/enemies/slime.tres",
+	"Snake": "res://resources/enemies/snake.tres",
+	"Sorcerer": "res://resources/enemies/sorcerer.tres",
+	"Spider": "res://resources/enemies/spider.tres",
 	"Troll": "res://resources/enemies/troll.tres",
 	"Potion of Healing": "res://resources/usable_items/potion_healing.tres",
 	"Scroll of Lightning": "res://resources/usable_items/scroll_lightning.tres",
@@ -156,7 +173,6 @@ func restore(save_data: Dictionary) -> void:
 		for item in inventory.items:
 			if fighter and item.equipment and item.equipment.equipped:
 				fighter.equipment_slots[item.equipment.type].append(item)
-
 
 
 func _add_item(item_def: ComponentItemDefinition) -> void:

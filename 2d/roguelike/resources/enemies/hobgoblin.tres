@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=7 format=3 uid="uid://o21mkuya2brs"]
+
+[ext_resource type="Script" path="res://scripts/entities/components/component_fighter_definition.gd" id="2_qiriw"]
+[ext_resource type="Script" path="res://scripts/entities/entity_definition.gd" id="3_saqyu"]
+[ext_resource type="Texture2D" uid="uid://bp24w5irgpuf0" path="res://art/tiles.png" id="4_tm64b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovwk4"]
+atlas = ExtResource("4_tm64b")
+region = Rect2(16, 240, 16, 16)
+
+[sub_resource type="Resource" id="Resource_6kg4g"]
+script = ExtResource("2_qiriw")
+max_hp = 20
+power = 6
+defense = 2
+xp = 20
+level = 1
+level_up_base = 0
+level_up_factor = 150
+death_texture = SubResource("AtlasTexture_ovwk4")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0t3b"]
+atlas = ExtResource("4_tm64b")
+region = Rect2(464, 32, 16, 16)
+
+[resource]
+script = ExtResource("3_saqyu")
+name = "Hobgoblin"
+texture = SubResource("AtlasTexture_v0t3b")
+color = Color(1, 1, 1, 1)
+type = 2
+blocks_movement = true
+inventory_capacity = 5
+fighter_def = SubResource("Resource_6kg4g")
+behavior = 2
