@@ -46,7 +46,7 @@ const ENTITY_DEFINITIONS = {
 	"Steel Helm": "res://resources/equipment/helm_steel.tres",
 	"Elven Helm": "res://resources/equipment/helm_elven.tres",
 	"Dwarven Helm": "res://resources/equipment/helm_dwarven.tres",
-	"Cloak": "res://resources/equipment/armor_cloak.tres",
+	"Mage's Cloak": "res://resources/equipment/armor_cloak.tres",
 	"Leather Armor": "res://resources/equipment/armor_leather.tres",
 	"Iron Armor": "res://resources/equipment/armor_iron.tres",
 	"Steel Armor": "res://resources/equipment/armor_steel.tres",
@@ -102,9 +102,9 @@ func _init(data: MapData, spawn_point: Vector2i, entity_str: String) -> void:
 func init_entity(entity_str: String) -> void:
 	if entity_str.begins_with(CORPSE_TEXT):
 		entity_str = entity_str.erase(0, CORPSE_TEXT.length())
-	entity_name = entity_str
+	_def = load(ENTITY_DEFINITIONS[entity_str])
+	entity_name = _def.name
 	is_player = entity_name == "Player"
-	_def = load(ENTITY_DEFINITIONS[entity_name])
 	type = _def.type
 	blocks_movement = _def.blocks_movement
 	texture = _def.texture

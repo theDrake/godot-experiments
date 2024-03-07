@@ -9,8 +9,9 @@ signal level_up_required
 signal leveled_up
 
 const DEFAULT_MAX_HP_BOOST: int = 5
-const DEFAULT_POWER_BOOST: int = 1
-const DEFAULT_DEFENSE_BOOST: int = 1
+const DEFAULT_POWER_BOOST: int = 2
+const DEFAULT_DEFENSE_BOOST: int = 2
+const DEFAULT_INTELLECT_BOOST: int = 2
 const PLAYER_TEXTURES = {
 	"default": preload("res://resources/player/default_texture.tres"),
 	"onehanded": preload("res://resources/player/sword_shield_texture.tres"),
@@ -36,8 +37,9 @@ var hp: int:
 				die_silently = true
 				await ready
 			die(die_silently)
-var defense: int
 var power: int
+var defense: int
+var intellect: int
 var equipment_slots: Array[Array] = []
 var death_texture: Texture
 #var death_color: Color
@@ -50,8 +52,9 @@ var level_up_factor: int
 func _init(def: ComponentFighterDefinition) -> void:
 	max_hp = def.max_hp
 	hp = def.max_hp
-	defense = def.defense
 	power = def.power
+	defense = def.defense
+	intellect = def.intellect
 	death_texture = def.death_texture
 	#death_color = def.death_color
 	xp = def.xp
@@ -65,6 +68,22 @@ func _init(def: ComponentFighterDefinition) -> void:
 func _ready() -> void:
 	if entity.is_player:
 		equipment_changed.connect(update_texture)
+
+
+func get_attack_damage() -> int:
+	return randi_range(power / 2, power)
+
+
+func get_damage_reduction() -> int:
+	return randi_range(defense / 4, 3 * defense / 4)
+
+
+func get_spell_potency() -> int:
+	return randi_range(intellect / 2, intellect)
+
+
+func get_spell_resistance() -> int:
+	return randi_range(0, intellect / 2)
 
 
 func heal(amount: int) -> int:
@@ -136,6 +155,7 @@ func equip(item: Entity, verbose: bool = false) -> bool:
 	equipment_slots[type].append(item)
 	power += item.equipment.power_bonus
 	defense += item.equipment.defense_bonus
+	intellect += item.equipment.intellect_bonus
 	item.equipment.equipped = true
 	if verbose:
 		MessageLog.send_message("You equip %s." % item.entity_name,
@@ -153,6 +173,7 @@ func unequip(item: Entity, verbose: bool = false) -> bool:
 				equipment_slots[type].remove_at(i)
 				power -= item.equipment.power_bonus
 				defense -= item.equipment.defense_bonus
+				intellect -= item.equipment.intellect_bonus
 				item.equipment.equipped = false
 				if verbose:
 					MessageLog.send_message("You unequip %s." %
@@ -177,7 +198,8 @@ func gain_xp(amount: int) -> void:
 
 
 func level_up() -> void:
-	xp -= xp_for_next_level()
+	gain_xp(-xp_for_next_level())
+	hp = max_hp
 	level += 1
 	leveled_up.emit()
 
@@ -188,7 +210,6 @@ func xp_for_next_level() -> int:
 
 func increase_max_hp(amount: int = DEFAULT_MAX_HP_BOOST) -> void:
 	max_hp += amount
-	hp += amount
 	MessageLog.send_message("You feel invigorated!", GameColors.STATUS_EFFECT)
 	level_up()
 
@@ -203,6 +224,12 @@ func increase_defense(amount: int = DEFAULT_DEFENSE_BOOST) -> void:
 	defense += amount
 	MessageLog.send_message("You feel lighter on your feet!",
 			GameColors.STATUS_EFFECT)
+	level_up()
+
+
+func increase_intellect(amount: int = DEFAULT_INTELLECT_BOOST) -> void:
+	intellect += amount
+	MessageLog.send_message("You feel wiser!", GameColors.STATUS_EFFECT)
 	level_up()
 
 
@@ -238,8 +265,9 @@ func get_save_data() -> Dictionary:
 	return {
 		"max_hp": max_hp,
 		"hp": hp,
-		"defense": defense,
 		"power": power,
+		"defense": defense,
+		"intellect": intellect,
 		"xp": xp,
 		"level": level,
 		"level_up_base": level_up_base,
@@ -250,8 +278,9 @@ func get_save_data() -> Dictionary:
 func restore(save_data: Dictionary) -> void:
 	max_hp = save_data["max_hp"]
 	hp = save_data["hp"]
-	defense = save_data["defense"]
 	power = save_data["power"]
+	defense = save_data["defense"]
+	intellect = save_data["intellect"]
 	xp = save_data["xp"]
 	level = save_data["level"]
 	level_up_base = save_data["level_up_base"]

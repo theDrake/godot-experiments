@@ -11,8 +11,9 @@ region = Rect2(544, 192, 16, 16)
 [sub_resource type="Resource" id="Resource_c47ef"]
 script = ExtResource("2_ttcm5")
 max_hp = 25
-power = 8
+power = 16
 defense = 2
+intellect = 2
 xp = 25
 level = 1
 level_up_base = 0

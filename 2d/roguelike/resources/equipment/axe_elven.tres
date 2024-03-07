@@ -9,6 +9,7 @@ script = ExtResource("1_ce8jf")
 type = 1
 power_bonus = 7
 defense_bonus = 0
+intellect_bonus = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulphl"]
 atlas = ExtResource("3_4hut3")

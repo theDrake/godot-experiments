@@ -7,7 +7,8 @@ func perform() -> bool:
 	if not target:
 		return false
 
-	var damage: int = maxi(entity.fighter.power - target.fighter.defense, 1)
+	var damage: int = maxi(0, entity.fighter.get_attack_damage() -
+			target.fighter.get_damage_reduction())
 	var attack_color: Color
 	var attack_description: String
 	if entity.is_player:

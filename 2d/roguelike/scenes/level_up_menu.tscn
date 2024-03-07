@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://2ulcswjbw84a"]
+[gd_scene load_steps=18 format=3 uid="uid://2ulcswjbw84a"]
 
 [ext_resource type="PackedScene" uid="uid://dii472yf242hh" path="res://scenes/inventory_button.tscn" id="1_0yatj"]
 [ext_resource type="Script" path="res://scripts/gui/level_up_menu.gd" id="1_c6a0k"]
@@ -47,13 +47,21 @@ unicode = 50
 [sub_resource type="Shortcut" id="Shortcut_mjslk"]
 events = [SubResource("InputEventKey_4h86h")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_tp3fl"]
+[sub_resource type="InputEventKey" id="InputEventKey_vm8ai"]
 device = -1
 keycode = 51
 unicode = 51
 
 [sub_resource type="Shortcut" id="Shortcut_0w4d6"]
-events = [SubResource("InputEventKey_tp3fl")]
+events = [SubResource("InputEventKey_vm8ai")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_fr2sg"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="Shortcut" id="Shortcut_s7psx"]
+events = [SubResource("InputEventKey_fr2sg")]
 
 [node name="LevelUpMenu" type="CanvasLayer"]
 script = ExtResource("1_c6a0k")
@@ -106,6 +114,12 @@ unique_name_in_owner = true
 layout_mode = 2
 shortcut = SubResource("Shortcut_0w4d6")
 
+[node name="IntellectUpgradeButton" parent="CenterContainer/PanelContainer/VBoxContainer" instance=ExtResource("1_0yatj")]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_s7psx")
+
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HealthUpgradeButton" to="." method="_on_health_upgrade_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/PowerUpgradeButton" to="." method="_on_power_upgrade_button_pressed"]
 [connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/DefenseUpgradeButton" to="." method="_on_defense_upgrade_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/IntellectUpgradeButton" to="." method="_on_intellect_upgrade_button_pressed"]

@@ -22,7 +22,9 @@ func use(action: ActionUse) -> bool:
 		return false
 	MessageLog.send_message("%s begins to stumble around..." %
 			target.entity_name, GameColors.STATUS_EFFECT)
-	target.add_child(ComponentMoverConfused.new(power))
+	target.add_child(ComponentMoverConfused.new(maxi(1, randi_range(power / 2,
+			power) + user.fighter.get_spell_potency() -
+			target.fighter.get_spell_resistance())))
 	consume(user)
 
 	return true

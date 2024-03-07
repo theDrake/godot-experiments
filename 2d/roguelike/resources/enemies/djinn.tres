@@ -11,8 +11,9 @@ region = Rect2(432, 176, 16, 16)
 [sub_resource type="Resource" id="Resource_6kg4g"]
 script = ExtResource("2_b74se")
 max_hp = 30
-power = 8
+power = 16
 defense = 6
+intellect = 20
 xp = 30
 level = 1
 level_up_base = 0

@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_flyrg"]
 script = ExtResource("3_k3wi5")
-power = 5
+power = 10
 radius = 0
 ranged = false
 

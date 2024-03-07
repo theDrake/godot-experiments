@@ -26,9 +26,12 @@ func use(action: ActionUse) -> bool:
 		return false
 
 	for target in targets:
+		var damage = maxi(1, randi_range(power / 2, power) +
+				action.entity.fighter.get_spell_potency() -
+				target.fighter.get_spell_resistance())
 		MessageLog.send_message("Flames engulf %s for %d damage!" %
-				[target.entity_name, power], GameColors.PLAYER_ATTACK)
-		target.fighter.hp -= power
+				[target.entity_name, damage], GameColors.PLAYER_ATTACK)
+		target.fighter.hp -= damage
 	consume(action.entity)
 
 	return true

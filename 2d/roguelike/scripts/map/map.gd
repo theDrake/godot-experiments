@@ -22,6 +22,7 @@ func _ready() -> void:
 func generate(player: Entity, depth: int) -> void:
 	data = _generator.generate_dungeon(player, depth)
 	populate(depth)
+	SignalBus.save_requested.emit()
 
 
 func populate(depth: int) -> void:

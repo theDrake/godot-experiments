@@ -9,6 +9,7 @@ script = ExtResource("1_xxxjv")
 type = 4
 power_bonus = 0
 defense_bonus = 1
+intellect_bonus = 10
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ulphl"]
 atlas = ExtResource("3_701qs")
@@ -16,7 +17,7 @@ region = Rect2(608, 16, 16, 16)
 
 [resource]
 script = ExtResource("2_ku6q4")
-name = "Cloak"
+name = "Mage's Cloak"
 texture = SubResource("AtlasTexture_ulphl")
 color = Color(1, 1, 1, 1)
 type = 1

@@ -8,12 +8,13 @@
 [sub_resource type="Resource" id="Resource_obms5"]
 script = ExtResource("1_rt25s")
 max_hp = 30
-power = 6
-defense = 2
+power = 4
+defense = 4
+intellect = 4
 xp = 0
 level = 1
-level_up_base = 50
-level_up_factor = 50
+level_up_base = 10
+level_up_factor = 20
 death_texture = ExtResource("1_n7isg")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hciw2"]

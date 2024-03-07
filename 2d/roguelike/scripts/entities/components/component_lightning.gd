@@ -22,9 +22,12 @@ func use(action: ActionUse) -> bool:
 				target = actor
 				closest_distance = distance
 	if target:
+		var damage: int = maxi(1, randi_range(power / 2, power) +
+				user.fighter.get_spell_potency() -
+				target.fighter.get_spell_resistance())
 		MessageLog.send_message("Lightning strikes %s for %d damage!" %
-				[target.entity_name, power], GameColors.PLAYER_ATTACK)
-		target.fighter.hp -= power
+				[target.entity_name, damage], GameColors.PLAYER_ATTACK)
+		target.fighter.hp -= damage
 		consume(user)
 
 		return true

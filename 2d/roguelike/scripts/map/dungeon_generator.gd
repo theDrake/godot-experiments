@@ -28,7 +28,7 @@ const ENEMIES: Array[String] = [
 ]
 const ITEMS: Array[Array] = [
 	[ # Armor
-		"Cloak",
+		"Mage's Cloak",
 		"Leather Boots",
 		"Leather Gloves",
 		"Wooden Shield",
@@ -181,7 +181,7 @@ func _get_weighted_index(array_size: int, difficulty: int) -> int:
 	var random_float: float = randf()
 	var comparison_float: float = 0
 	for i in array_size:
-		comparison_float += 2.0 * ((1.0 - comparison_float) /
+		comparison_float += 3.0 * ((1.0 - comparison_float) /
 				(1.0 + array_size - i))
 		if random_float + (0.1 * difficulty) < comparison_float:
 			return i

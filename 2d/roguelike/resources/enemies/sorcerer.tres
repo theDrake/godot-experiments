@@ -8,8 +8,9 @@
 [sub_resource type="Resource" id="Resource_6kg4g"]
 script = ExtResource("2_3qis8")
 max_hp = 20
-power = 5
+power = 10
 defense = 4
+intellect = 15
 xp = 30
 level = 1
 level_up_base = 0
